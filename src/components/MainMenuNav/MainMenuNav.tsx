@@ -16,8 +16,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const pages = [
-  { name: "About", gameLink: "/", disabled: false },
-  { name: "Cart", gameLink: "*", disabled: false },
+  { name: "Menu", link: "/", disabled: false },
+  { name: "About", link: "/about", disabled: false },
+  { name: "Kitchen", link: "/kitchen", disabled: false },
+  { name: "Cart", link: "/cart", disabled: false },
 ];
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -42,7 +44,7 @@ const MainMenuNav = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#15171e" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#ffffff" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -57,13 +59,13 @@ const MainMenuNav = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
             Restaurant Menager
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none", justifyContent:'flex-end' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -99,7 +101,7 @@ const MainMenuNav = () => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -116,17 +118,17 @@ const MainMenuNav = () => {
               textDecoration: "none",
             }}
           >
-            Blitz Games
+            Restaurant Menager
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" , justifyContent:'flex-end'} }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, display: "block" }}
                 disabled={page.disabled}
               >
-                <Link to={page.gameLink}>{page.name}</Link>
+                <Link to={page.link}>{page.name}</Link>
               </Button>
             ))}
           </Box>

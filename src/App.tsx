@@ -3,6 +3,11 @@ import styled from "styled-components";
 // import reactLogo from './assets/react.svg'
 import "./App.css";
 import MainMenuNav from "./components/MainMenuNav/MainMenuNav";
+import About from './views/About/About';
+import { Cart } from './views/Cart/Cart';
+import { CategoryMenu } from './views/CategoryMenu/CategoryMenu';
+import { FoodMenu } from './views/FoodMenu/FoodMenu';
+import { Kitchen } from './views/Kitchen/Kitchen';
 import { MainPage } from "./views/MainPage/MainPage";
 import PageNotFound from "./views/PageNotFound/PageNotFound";
 
@@ -16,6 +21,11 @@ function App() {
           <Content>
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/category" element={<CategoryMenu />} />
+              <Route path="/food" element={<FoodMenu />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/kitchen" element={<Kitchen />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/pagenotfound" element={<PageNotFound />} />
             </Routes>
@@ -39,4 +49,10 @@ const Wrapper = styled.div`
 const Content = styled.div`
   display: flex;
   width:100%;
+  margin:0 auto;
+  max-width:100%;
+  /* max-width:1488px; */
+  /* padding:24px; */
+  /* min-height:100vh; */
+  min-height: calc(100vh - 70px);;
 `;
