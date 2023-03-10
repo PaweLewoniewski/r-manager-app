@@ -1,8 +1,22 @@
+import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
+import { getCategories } from "../../queries/getCategories";
 
 export const CategoryMenu = () => {
+
+
+    const { refetch, status, data } = useQuery({
+        queryKey: ["SearchCardsInfinite"],
+        queryFn: () => getCategories(),
+        keepPreviousData: true,
+      });
+    
+      if (status === "loading") return <div>"Loading..."</div>;
+    
+      if (status === "error") return <div>An error has occurred</div>;
+
   return (
     <Wrapper>
       <StripesContener>
