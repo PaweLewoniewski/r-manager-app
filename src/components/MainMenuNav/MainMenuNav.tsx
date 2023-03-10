@@ -44,7 +44,7 @@ const MainMenuNav = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#ffffff" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#ffffff", zIndex:'5' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
