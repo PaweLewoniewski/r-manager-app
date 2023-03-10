@@ -1,36 +1,56 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
+import { StripesShape } from "../../assets/img/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
 import { getCategories } from "../../queries/getCategories";
 
+export interface CategoryCardData {
+  menuName: string;
+  menuImg: [];
+}
+
+export interface CategoryData {
+  id?: number;
+  attributes: CategoryCardData;
+}
+
+const placeholdercardData = [
+  {
+    id: 0,
+    attributes: {
+      menuName: "Loading...",
+    },
+  },
+];
+
 export const CategoryMenu = () => {
+  const [categoryCards, setCategoryCards] = useState<[]>([]);
 
+  const { refetch, status, data } = useQuery({
+    queryKey: ["MenuCategoriesData"],
+    queryFn: getCategories,
+    placeholderData: placeholdercardData,
+    onSuccess: (data) => console.log(data),
+  });
 
-    const { refetch, status, data } = useQuery({
-        queryKey: ["SearchCardsInfinite"],
-        queryFn: () => getCategories(),
-        keepPreviousData: true,
-      });
-    
-      if (status === "loading") return <div>"Loading..."</div>;
-    
-      if (status === "error") return <div>An error has occurred</div>;
+  if (status === "loading") return <div>"Loading..."</div>;
+
+  if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Wrapper>
-      <StripesContener>
-        <StripeOne />
-        <StripeOne />
-        <StripeOne />
-        <StripeOne />
-        <StripeOne />
-        <StripeOne />
-        <StripeOne />
-        <StripeOne />
-      </StripesContener>
+      <StripesShape />
       <ContentPage>
-        <MenuCard />
+        {data !== undefined
+          ? data.map(({ id, attributes }: CategoryData) => (
+              <MenuCard
+                key={id}
+                attributes={attributes || placeholdercardData}
+              />
+            ))
+          : ""}
       </ContentPage>
     </Wrapper>
   );
@@ -64,30 +84,3 @@ const ContentPage = styled.div`
     height: auto;
   }
 `;
-
-const StripesContener = styled.ul`
-  position: absolute;
-  width: 100%;
-  min-height: 100%;
-  top: 0%;
-  left: -25%;
-  transform: translate(0%, -50%);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  li:nth-child(even) {
-    width: 0%;
-    transform: translate(40%, 60%) rotate(-45deg) skew(-45deg);
-  }
-`;
-
-const StripeOne = styled.li`
-  width: 100%;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease-in-out;
-  transform: translate(0%, 50%) rotate(-45deg) skew(-45deg);
-`;
-

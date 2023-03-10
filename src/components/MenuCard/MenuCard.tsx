@@ -5,10 +5,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import BgCategory from "../../assets/img/categorymenu.webp";
+import { CategoryData } from "../../views/CategoryMenu/CategoryMenu";
 
-export const MenuCard = () => {
+export const MenuCard = ({ attributes }: CategoryData) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, margin: "10px", minWidth: "300px" }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -18,12 +19,7 @@ export const MenuCard = () => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Dinners
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Dinner usually refers to what is in many Western cultures the
-            largest and most formal meal of the day. Historically, the largest
-            meal used to be eaten around midday, and called dinner
+            {attributes.menuName}
           </Typography>
         </CardContent>
       </CardActionArea>

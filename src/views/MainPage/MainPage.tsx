@@ -1,9 +1,20 @@
 import { Typography } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BgMain from "../../assets/img/restaurant.webp";
+import { getCategories } from "../../queries/getCategories";
 
 export const MainPage = () => {
+
+const queryClient = useQueryClient();
+  const onHoverPrefetch = () => {
+    queryClient.prefetchQuery({
+      queryKey:['MenuCategoriesData'],
+      queryFn: () => getCategories(),
+    })
+  }
+
   return (
     <Wrapper>
       <ContentPage>
@@ -11,12 +22,12 @@ export const MainPage = () => {
           to={"/category"}
           style={{
             width: "100%",
-            height: "80%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             padding:'10px'
           }}
+          onMouseEnter={onHoverPrefetch}
         >
           <NavBox>
             <Typography
@@ -32,7 +43,6 @@ export const MainPage = () => {
           to={"/category"}
           style={{
             width: "100%",
-            height: "80%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
