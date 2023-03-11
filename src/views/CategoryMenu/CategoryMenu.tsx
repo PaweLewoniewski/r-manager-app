@@ -29,18 +29,15 @@ export interface CategoryData {
   attributes: CategoryCardData;
 }
 
-const placeholdercardData = [
+const placeholdercardData = 
   {
-    id: 0,
-    attributes: {
       title: "Loading...",
-      url:"url"
-    },
-  },
-];
+      url:`${BgCategory}`
+  }
+;
 
 export const CategoryMenu = () => {
-  const [categoryCards, setCategoryCards] = useState<CategoryData[]>([]);
+  const [categoryCards, setCategoryCards] = useState<CategoryData[]>();
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],
@@ -59,7 +56,7 @@ export const CategoryMenu = () => {
       <ContentPage>
           {categoryCards !== undefined
             ? categoryCards.map(({attributes:{ title, image: { data:[{ id, attributes:{ url } }] }} }:CategoryData) => (
-                <MenuCard key={id | 0} title={title || 'Loading...'} url={url}/>
+                <MenuCard key={id || 0} data={{title,url} || placeholdercardData}/>
               ))
             : ""}
       </ContentPage>
