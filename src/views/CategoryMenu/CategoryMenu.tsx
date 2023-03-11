@@ -4,7 +4,7 @@ import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { StripesShape } from "../../assets/img/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
-import { getCategories } from "../../queries/getCategories";
+import { getCategories } from "../../queries/queries";
 
 export interface ImgUrl {
   url:string;

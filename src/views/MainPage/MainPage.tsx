@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BgMain from "../../assets/img/restaurant.webp";
-import { getCategories } from "../../queries/getCategories";
+import { getCategories } from "../../queries/queries";
 
 export const MainPage = () => {
 
