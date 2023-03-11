@@ -6,9 +6,22 @@ import { StripesShape } from "../../assets/img/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
 import { getCategories } from "../../queries/getCategories";
 
+export interface ImgUrl {
+  url:string;
+}
+
+interface ImageData {
+  id:number;
+  attributes:ImgUrl;
+}
+
+interface ImageNestedData {
+  data:ImageData[];
+}
+
 export interface CategoryCardData {
-  menuName: string;
-  menuImg: [];
+  title: string;
+  image: ImageNestedData;
 }
 
 export interface CategoryData {
@@ -20,19 +33,20 @@ const placeholdercardData = [
   {
     id: 0,
     attributes: {
-      menuName: "Loading...",
+      title: "Loading...",
+      url:"url"
     },
   },
 ];
 
 export const CategoryMenu = () => {
-  const [categoryCards, setCategoryCards] = useState<[]>([]);
+  const [categoryCards, setCategoryCards] = useState<CategoryData[]>([]);
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],
     queryFn: getCategories,
     placeholderData: placeholdercardData,
-    onSuccess: (data) => console.log(data),
+    onSuccess: (data) => setCategoryCards(data),
   });
 
   if (status === "loading") return <div>"Loading..."</div>;
@@ -43,14 +57,11 @@ export const CategoryMenu = () => {
     <Wrapper>
       <StripesShape />
       <ContentPage>
-        {data !== undefined
-          ? data.map(({ id, attributes }: CategoryData) => (
-              <MenuCard
-                key={id}
-                attributes={attributes || placeholdercardData}
-              />
-            ))
-          : ""}
+          {categoryCards !== undefined
+            ? categoryCards.map(({attributes:{ title, image: { data:[{ id, attributes:{ url } }] }} }:CategoryData) => (
+                <MenuCard key={id | 0} title={title || 'Loading...'} url={url}/>
+              ))
+            : ""}
       </ContentPage>
     </Wrapper>
   );
@@ -70,15 +81,17 @@ const Wrapper = styled.div`
 `;
 
 const ContentPage = styled.div`
-  width: 100%;
   margin: 0 auto;
   width: 100%;
-  height: 100%;
-  max-width: 1488px;
+  /* height: 100%; */
+  padding:20px;
+  /* max-width: 1488px; */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
+  background-color: rgba(48, 48, 48, 0.5);
+  backdrop-filter: blur(10px);
   @media (max-width: 900px) {
     flex-wrap: wrap;
     height: auto;

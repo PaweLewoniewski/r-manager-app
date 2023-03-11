@@ -5,21 +5,29 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import BgCategory from "../../assets/img/categorymenu.webp";
-import { CategoryData } from "../../views/CategoryMenu/CategoryMenu";
+import { CategoryData, ImgUrl } from "../../views/CategoryMenu/CategoryMenu";
 
-export const MenuCard = ({ attributes }: CategoryData) => {
+type MenuCardProp = CategoryData & ImgUrl;
+
+interface MenuCardProps {
+  title:string;
+  url:string;
+}
+
+export const MenuCard = ({title,url}:MenuCardProps) => {
+
   return (
     <Card sx={{ maxWidth: 345, margin: "10px", minWidth: "300px" }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image={BgCategory}
+          image={url? url : BgCategory}
           alt="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {attributes.menuName}
+            {title}
           </Typography>
         </CardContent>
       </CardActionArea>

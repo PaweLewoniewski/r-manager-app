@@ -48,6 +48,7 @@ const queryClient = useQueryClient();
             justifyContent: "center",
             padding:'10px'
           }}
+          onMouseEnter={onHoverPrefetch}
         >
           <NavBox>
             <Typography
