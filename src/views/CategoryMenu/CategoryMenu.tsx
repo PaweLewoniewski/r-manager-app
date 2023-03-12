@@ -1,11 +1,12 @@
 import { Slide } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
-import { StripesShape } from "../../assets/img/StripesShape/StripesShape";
+import { StripesShape } from "../../assets/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
-import { getCategories } from "../../queries/queries";
+import { getCategories, getFoodMenu } from "../../queries/queries";
 
 export interface ImgUrl {
   url:string;
@@ -40,6 +41,19 @@ const placeholdercardData =
 export const CategoryMenu = () => {
   const [categoryCards, setCategoryCards] = useState<CategoryData[]>();
   const [enterAnimation, setEnterAnimation] = useState(false);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  
+  const goToCategoryLinkHandler = (title:string) => {
+    navigate("/food");
+    console.log(`go to ${title}`)
+  }
+
+  queryClient.prefetchQuery({
+    queryKey: ["FoodMenu"],
+    queryFn: () => getFoodMenu(),
+  });
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],
@@ -67,7 +81,7 @@ export const CategoryMenu = () => {
             <ContentPage>
                 {categoryCards !== undefined
                   ? categoryCards.map(({attributes:{ title, image: { data:[{ id, attributes:{ url } }] }} }:CategoryData) => (
-                      <MenuCard key={id || 0} data={{title,url} || placeholdercardData}/>
+                      <MenuCard key={id || 0} data={{title,url} || placeholdercardData} onClick={() => goToCategoryLinkHandler(title)}/>
                     ))
                   : ""}
             </ContentPage>

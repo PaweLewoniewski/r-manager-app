@@ -12,12 +12,13 @@ interface MenuCardProps {
 
 type MenuCardType = {
   data: MenuCardProps;
+  onClick:() => void;
 }
 
-export const MenuCard = ({data}:MenuCardType) => {
+export const MenuCard = ({data,onClick}:MenuCardType) => {
 
   return (
-    <Card sx={{ maxWidth: 345, margin: "10px", minWidth: "300px" }}>
+    <Card sx={{ maxWidth: 345, margin: "10px", minWidth: "300px" }} onClick={onClick}>
       <CardActionArea>
         <CardMedia
           component="img"

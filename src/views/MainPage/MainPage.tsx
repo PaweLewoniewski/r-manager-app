@@ -8,7 +8,6 @@ import { getCategories } from "../../queries/queries";
 
 export const MainPage = () => {
   const [enterAnimation, setEnterAnimation] = useState(false);
-  const [goLocation, setGoLocation] = useState(false);
 
   const containerRef = useRef(null);
   const queryClient = useQueryClient();
@@ -55,7 +54,6 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onClick={() => setGoLocation(false)}
                 // onMouseEnter={onHoverPrefetch}
               >
                 <NavBox>
@@ -85,7 +83,6 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onClick={() => setGoLocation(true)}
                 // onMouseEnter={onHoverPrefetch}
               >
                 <NavBox>
