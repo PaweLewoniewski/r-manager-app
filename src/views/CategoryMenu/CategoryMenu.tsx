@@ -1,3 +1,4 @@
+import { Slide } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import styled from "styled-components";
@@ -38,12 +39,14 @@ const placeholdercardData =
 
 export const CategoryMenu = () => {
   const [categoryCards, setCategoryCards] = useState<CategoryData[]>();
+  const [enterAnimation, setEnterAnimation] = useState(false);
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],
     queryFn: getCategories,
     placeholderData: placeholdercardData,
-    onSuccess: (data) => setCategoryCards(data),
+    onSuccess: (data) => {setCategoryCards(data),
+    setEnterAnimation(true)}
   });
 
   if (status === "loading") return <div>"Loading..."</div>;
@@ -51,16 +54,26 @@ export const CategoryMenu = () => {
   if (status === "error") return <div>An error has occurred</div>;
 
   return (
-    <Wrapper>
-      <StripesShape />
-      <ContentPage>
-          {categoryCards !== undefined
-            ? categoryCards.map(({attributes:{ title, image: { data:[{ id, attributes:{ url } }] }} }:CategoryData) => (
-                <MenuCard key={id || 0} data={{title,url} || placeholdercardData}/>
-              ))
-            : ""}
-      </ContentPage>
-    </Wrapper>
+    <Slide
+    direction={"left"}
+    in={enterAnimation}
+    mountOnEnter
+    unmountOnExit
+    {...(enterAnimation ? { timeout: 500 } : {})}
+  >
+        <Wrapper>
+          <StripesShape />
+          <Slide direction="right" in={enterAnimation} mountOnEnter unmountOnExit {...(enterAnimation ? { timeout: 500 } : {})}>
+            <ContentPage>
+                {categoryCards !== undefined
+                  ? categoryCards.map(({attributes:{ title, image: { data:[{ id, attributes:{ url } }] }} }:CategoryData) => (
+                      <MenuCard key={id || 0} data={{title,url} || placeholdercardData}/>
+                    ))
+                  : ""}
+            </ContentPage>
+          </Slide>
+        </Wrapper>
+        </Slide>
   );
 };
 
@@ -87,6 +100,8 @@ const ContentPage = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
+  border-top:1px solid white;
+  border-bottom:1px solid white;
   background-color: rgba(48, 48, 48, 0.5);
   backdrop-filter: blur(10px);
   @media (max-width: 900px) {
