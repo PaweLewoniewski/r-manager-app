@@ -6,20 +6,8 @@ import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { StripesShape } from "../../assets/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
+import { ImageNestedData } from "../../data/dataTypes";
 import { getCategories, getFoodMenu } from "../../queries/queries";
-
-export interface ImgUrl {
-  url:string;
-}
-
-interface ImageData {
-  id:number;
-  attributes:ImgUrl;
-}
-
-interface ImageNestedData {
-  data:ImageData[];
-}
 
 export interface CategoryCardData {
   title: string;
@@ -50,10 +38,10 @@ export const CategoryMenu = () => {
     console.log(`go to ${title}`)
   }
 
-  queryClient.prefetchQuery({
-    queryKey: ["FoodMenu"],
-    queryFn: () => getFoodMenu(),
-  });
+  // queryClient.prefetchQuery({
+  //   queryKey: ["FoodMenu"],
+  //   queryFn: () => getFoodMenu(),
+  // });
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],

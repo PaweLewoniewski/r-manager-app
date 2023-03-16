@@ -16,12 +16,12 @@ export const MainPage = () => {
     queryFn: () => getCategories(),
   });
 
-  // const onHoverPrefetch = () => {
-  //   queryClient.prefetchQuery({
-  //     queryKey: ["MenuCategoriesData"],
-  //     queryFn: () => getCategories(),
-  //   });
-  // };
+  const onHoverPrefetch = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["MenuCategoriesData"],
+      queryFn: () => getCategories(),
+    });
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -54,7 +54,7 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                // onMouseEnter={onHoverPrefetch}
+                onMouseEnter={onHoverPrefetch}
               >
                 <NavBox>
                   <Typography
@@ -83,7 +83,7 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                // onMouseEnter={onHoverPrefetch}
+                onMouseEnter={onHoverPrefetch}
               >
                 <NavBox>
                   <Typography
