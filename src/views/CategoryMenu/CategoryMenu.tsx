@@ -1,5 +1,5 @@
 import { Slide } from "@mui/material";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -7,7 +7,7 @@ import BgCategory from "../../assets/img/categorymenu.webp";
 import { StripesShape } from "../../assets/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
 import { ImageNestedData } from "../../data/dataTypes";
-import { getCategories, getFoodMenu } from "../../queries/queries";
+import { getCategories  } from "../../queries/queries";
 
 export interface CategoryCardData {
   title: string;
@@ -30,18 +30,11 @@ export const CategoryMenu = () => {
   const [categoryCards, setCategoryCards] = useState<CategoryData[]>();
   const [enterAnimation, setEnterAnimation] = useState(false);
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
-  
   const goToCategoryLinkHandler = (title:string) => {
     navigate("/food");
     console.log(`go to ${title}`)
   }
-
-  // queryClient.prefetchQuery({
-  //   queryKey: ["FoodMenu"],
-  //   queryFn: () => getFoodMenu(),
-  // });
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],

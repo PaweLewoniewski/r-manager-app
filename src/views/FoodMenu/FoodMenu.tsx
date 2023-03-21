@@ -81,7 +81,6 @@ export const FoodMenu = () => {
                   )
                 )
               : ""}
-            {/* <ListCard /> */}
           </ContentPage>
         </Grow>
       </Wrapper>
