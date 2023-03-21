@@ -32,18 +32,18 @@ export const CategoryMenu = () => {
   const navigate = useNavigate();
 
   const goToCategoryLinkHandler = (title:string) => {
-    navigate("/food");
-    console.log(`go to ${title}`)
+    navigate("/food", { state: { titlePage: title } });
   }
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuCategoriesData"],
     queryFn: getCategories,
     placeholderData: placeholdercardData,
-    onSuccess: (data) => {setCategoryCards(data),
+    onSuccess: (data) => {
+      setCategoryCards(data),
     setEnterAnimation(true)}
   });
-
+  console.log(categoryCards)
   if (status === "loading") return <div>"Loading..."</div>;
 
   if (status === "error") return <div>An error has occurred</div>;
@@ -60,7 +60,7 @@ export const CategoryMenu = () => {
           <StripesShape />
           <Slide direction="right" in={enterAnimation} mountOnEnter unmountOnExit {...(enterAnimation ? { timeout: 500 } : {})}>
             <ContentPage>
-                {categoryCards !== undefined
+                {categoryCards !== undefined 
                   ? categoryCards.map(({attributes:{ title, image: { data:[{ id, attributes:{ url } }] }} }:CategoryData) => (
                       <MenuCard key={id || 0} data={{title,url} || placeholdercardData} onClick={() => goToCategoryLinkHandler(title)}/>
                     ))

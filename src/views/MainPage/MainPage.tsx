@@ -67,7 +67,6 @@ export const MainPage = () => {
               </Link>
             </Slide>
           </LinkBoxLeft>
-          <Separator />
           <LinkBoxRight>
             <Slide
               direction="right"
@@ -153,30 +152,6 @@ const ContentPage = styled.div`
   }
 `;
 
-const Separator = styled.div`
-  width: 2px;
-  height: 100%;
-  background: white;
-  z-index: 10;
-  position: relative;
-  &:before {
-    content: "";
-    border-radius: 3px;
-    width: 100px;
-    height: 100px;
-    border: 2px solid white;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.5);
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%) rotate(45deg);
-  }
-  @media (max-width: 900px) {
-    display: none;
-  }
-`;
-
 const LinkBoxLeft = styled.div`
   width: 100%;
   display: flex;
@@ -185,6 +160,7 @@ const LinkBoxLeft = styled.div`
   transition: all 0.3s ease-in-out;
   transform: perspective(200px) rotateY(0deg);
   overflow: hidden;
+  padding:15px;
   &:hover {
     transition: all 0.3s ease-in-out;
     transform: perspective(200px) rotateY(3deg);
@@ -199,6 +175,7 @@ const LinkBoxRight = styled.div`
   transition: all 0.3s ease-in-out;
   transform: perspective(200px) rotateY(360deg);
   overflow: hidden;
+  padding:15px;
   &:hover {
     transition: all 0.3s ease-in-out;
     transform: perspective(200px) rotateY(357deg);

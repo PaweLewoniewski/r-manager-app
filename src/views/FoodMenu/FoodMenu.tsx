@@ -2,6 +2,7 @@ import { Slide, Typography } from "@mui/material";
 import Grow from "@mui/material/Grow";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { ListCard } from "../../components/ListCard/ListCard";
@@ -23,10 +24,12 @@ export const FoodMenu = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
   const [enterGrowAnimation, setEnterGrowAnimation] = useState(true);
   const [foodCards, setFoodCards] = useState<any[]>();
+  const { state } = useLocation();
+  const { titlePage } = state;
 
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuFoodData"],
-    queryFn: getFoodMenu,
+    queryFn: () => getFoodMenu(titlePage),
     // placeholderData: placeholdercardData,
     onSuccess: (data) => {
       setFoodCards(data), setEnterAnimation(true);
@@ -54,7 +57,7 @@ export const FoodMenu = () => {
           <ContentPage>
             <Title>
               <Typography variant="h4" sx={{ color: "white" }}>
-                Dinners
+                {titlePage}
               </Typography>
             </Title>
             {foodCards !== undefined
@@ -128,5 +131,5 @@ const Title = styled.div`
   justify-content: flex-start;
   border-bottom: 1px solid white;
   width: 100%;
-  padding:5px;
+  padding: 5px;
 `;
