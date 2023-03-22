@@ -4,7 +4,7 @@ import styled from "styled-components";
 import "./App.css";
 import MainMenuNav from "./components/MainMenuNav/MainMenuNav";
 import About from './views/About/About';
-import { Cart } from './views/Cart/Cart';
+import { Checkout } from './views/Checkout/Checkout';
 import { CategoryMenu } from './views/CategoryMenu/CategoryMenu';
 import { FoodMenu } from './views/FoodMenu/FoodMenu';
 import { Kitchen } from './views/Kitchen/Kitchen';
@@ -25,7 +25,7 @@ function App() {
               <Route path="/food" element={<FoodMenu />} />
               {/* <Route path="/about" element={<About />} /> */}
               <Route path="/kitchen" element={<Kitchen />} />
-              <Route path="/cart" element={<Cart />} />
+              <Route path="/cart" element={<Checkout />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/pagenotfound" element={<PageNotFound />} />
             </Routes>
