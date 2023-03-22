@@ -110,6 +110,7 @@ const Wrapper = styled.div`
   background: url(${BgMain}) no-repeat;
   background-position: center;
   background-size: cover;
+  margin:5px;
 `;
 
 const NavBox = styled.span`

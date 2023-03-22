@@ -94,6 +94,7 @@ const Wrapper = styled.div`
   background-size: cover;
   overflow: hidden;
   position: relative;
+  margin:5px;
 `;
 
 const ContentPage = styled.div`
