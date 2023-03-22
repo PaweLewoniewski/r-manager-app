@@ -1,5 +1,4 @@
 import { Slide, Typography } from "@mui/material";
-import Grow from "@mui/material/Grow";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -22,7 +21,6 @@ export interface CategoryData {
 
 export const FoodMenu = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
-  const [enterGrowAnimation, setEnterGrowAnimation] = useState(true);
   const [foodCards, setFoodCards] = useState<any[]>();
   const { state } = useLocation();
   const { titlePage } = state;
@@ -49,11 +47,6 @@ export const FoodMenu = () => {
       {...(enterAnimation ? { timeout: 500 } : {})}
     >
       <Wrapper>
-        <Grow
-          in={enterGrowAnimation}
-          style={{ transformOrigin: "0 0 0" }}
-          {...(enterGrowAnimation ? { timeout: 1000 } : {})}
-        >
           <ContentPage>
             <Title>
               <Typography variant="h4" sx={{ color: "white" }}>
@@ -85,7 +78,6 @@ export const FoodMenu = () => {
                 )
               : ""}
           </ContentPage>
-        </Grow>
       </Wrapper>
     </Slide>
   );
@@ -106,18 +98,16 @@ const Wrapper = styled.div`
 
 const ContentPage = styled.div`
   margin: 0 auto;
-  /* width: 100%; */
   height: 100%;
   padding: 20px;
-  /* max-width: 1488px; */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: column;
   z-index: 2;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
   background-color: rgba(48, 48, 48, 0.5);
   backdrop-filter: blur(10px);
   @media (max-width: 900px) {
@@ -131,5 +121,5 @@ const Title = styled.div`
   justify-content: flex-start;
   border-bottom: 1px solid white;
   width: 100%;
-  padding: 5px;
+  margin:20px 5px;
 `;

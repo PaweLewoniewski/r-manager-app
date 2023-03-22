@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 const pages = [
   { name: "Menu", link: "/", disabled: false },
-  { name: "About", link: "/about", disabled: false },
+  // { name: "About", link: "/about", disabled: false },
   { name: "Kitchen", link: "/kitchen", disabled: false },
   { name: "Cart", link: "/cart", disabled: false },
 ];

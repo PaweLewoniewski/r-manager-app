@@ -23,7 +23,7 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/category" element={<CategoryMenu />} />
               <Route path="/food" element={<FoodMenu />} />
-              <Route path="/about" element={<About />} />
+              {/* <Route path="/about" element={<About />} /> */}
               <Route path="/kitchen" element={<Kitchen />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="*" element={<PageNotFound />} />
