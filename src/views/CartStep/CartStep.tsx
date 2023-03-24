@@ -2,22 +2,26 @@ import React from 'react';
 import { Typography } from "@mui/material";
 import styled from "styled-components";
 import { CardCart } from "../../components/CartCard/CartCard";
+import { useShoppingCart } from '../../context/ContextShopingCart';
 
 export const CartStep = () => {
-    return (
-        <Wrapper>
-        <ContentPage>
-          <Title>
-            <Typography variant="h6" sx={{ color: "white" }}>
-              Your Cart
-            </Typography>
-          </Title>
-          <ContentBox>
-            <CardCart />
-          </ContentBox>
-        </ContentPage>
-      </Wrapper>
-        );
+
+  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart();
+
+  return (
+    <Wrapper>
+      <ContentPage>
+        <Title>
+          <Typography variant="h6" sx={{ color: "white" }}>
+            Your Cart
+          </Typography>
+        </Title>
+        <ContentBox>
+          <CardCart />
+        </ContentBox>
+      </ContentPage>
+    </Wrapper>
+  );
 }
 
 

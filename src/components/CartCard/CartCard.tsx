@@ -8,8 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import BgCategory from "../../assets/img/categorymenu.webp";
-import { SmallSelectInput } from "../../assets/SmallSelectInput/SmallSelectInput";
-import { tableQuantity } from "../../data/data";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
