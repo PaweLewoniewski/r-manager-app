@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { Slide, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
@@ -34,7 +34,7 @@ export const FoodMenu = () => {
     },
   });
 
-  if (status === "loading") return <div>"Loading..."</div>;
+  if (status === "loading") return <div>Loading...</div>;
 
   if (status === "error") return <div>An error has occurred</div>;
 

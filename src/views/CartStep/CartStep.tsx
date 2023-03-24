@@ -1,3 +1,4 @@
+import React from 'react';
 import { Typography } from "@mui/material";
 import styled from "styled-components";
 import { CardCart } from "../../components/CartCard/CartCard";
