@@ -20,14 +20,14 @@ export const Kitchen = () => {
       <Wrapper>
         <ContentPage>
           <Title>
-            <Typography variant="h4" sx={{ color: "white" }}>
+            <Typography component={'span'} variant="h4" sx={{ color: "white" }}>
               Kitchen
             </Typography>
           </Title>
           <ContentBox>
             <Box sx={{ width: "50%" }}>
               <BoxTitle>
-                <Typography variant="h6" sx={{ color: "white" }}>
+                <Typography component={'span'} variant="h6" sx={{ color: "white" }}>
                   Takeaway
                 </Typography>
               </BoxTitle>
@@ -38,7 +38,7 @@ export const Kitchen = () => {
             <Separator />
             <Box sx={{ width: "50%" }}>
               <BoxTitle>
-                <Typography variant="h6" sx={{ color: "white" }}>
+                <Typography component={'span'} variant="h6" sx={{ color: "white" }}>
                   At location
                 </Typography>
               </BoxTitle>

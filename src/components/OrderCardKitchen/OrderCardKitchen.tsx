@@ -26,7 +26,7 @@ export const OrderCardKitchen = () => {
       />
       <Box sx={{ display: "flex", flexDirection: "column", width:'85%' }}>
         <CardContent sx={{padding:'5px'}}>
-          <Typography variant="h6">
+          <Typography component={'span'} variant="h6">
             Meat Title
           </Typography>
         </CardContent>

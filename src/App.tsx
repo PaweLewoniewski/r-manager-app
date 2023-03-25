@@ -16,12 +16,12 @@ import { ShoppingCartProvider } from './context/ShoppingCartContext';
 function App() {
 
   return (
-    <ShoppingCartProvider>
       <div className="App">
         <Router>
           <Wrapper>
             <MainMenuNav />
             <Content>
+            <ShoppingCartProvider>
               <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/category" element={<CategoryMenu />} />
@@ -32,11 +32,11 @@ function App() {
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="/pagenotfound" element={<PageNotFound />} />
               </Routes>
+              </ShoppingCartProvider>
             </Content>
           </Wrapper>
         </Router>
       </div>
-    </ShoppingCartProvider>
   );
 }
 

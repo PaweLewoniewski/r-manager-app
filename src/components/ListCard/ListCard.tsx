@@ -38,7 +38,7 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
   } = useShoppingCart();
 
   const quantity = getItemQuantity(data.id);
-  console.log(quantity)
+
   return (
     <div ref={containerRef}>
       <Slide
@@ -61,15 +61,15 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
             image={data.url}
             alt="Food Example Image"
           />
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardContent>
-              <Typography component="div" variant="h5">
+          <Box>
+            <CardContent style={{ display: "flex", flexDirection: "column" }}>
+              <Typography component="span" variant="h5">
                 {data.title}
               </Typography>
               <Typography
                 variant="subtitle1"
                 color="text.secondary"
-                component="div"
+                component="span"
               >
                 {data.description}
               </Typography>
@@ -137,17 +137,6 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
                         onClick={() => decreaseCartQuantity(data.id)}
                       >
                         <RemoveIcon />
-                      </Button>
-                    </Box>
-                    <Box
-                      style={{
-                        display: "flex",
-                        padding: "10px",
-                        justifyContent: "flex-end",
-                      }}
-                    >
-                      <Button variant="outlined" color="error" onClick={() => removeFromCart(data.id)}>
-                        <DeleteForeverIcon />
                       </Button>
                     </Box>
                   </Box>

@@ -31,7 +31,6 @@ export const FoodMenu = () => {
     // placeholderData: placeholdercardData,
     onSuccess: (data) => {
       setFoodCards(data), setEnterAnimation(true);
-      console.log(foodCards)
     },
   });
 
@@ -50,7 +49,7 @@ export const FoodMenu = () => {
       <Wrapper>
           <ContentPage>
             <Title>
-              <Typography variant="h4" sx={{ color: "white" }}>
+              <Typography component={'span'} variant="h4" sx={{ color: "white" }}>
                 {titlePage}
               </Typography>
             </Title>

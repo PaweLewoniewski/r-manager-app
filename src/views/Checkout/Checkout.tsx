@@ -48,7 +48,7 @@ export const Checkout = () => {
     <Wrapper>
       <ContentPage>
         <Title>
-          <Typography variant="h4" sx={{ color: "white" }}>
+          <Typography component={'span'} variant="h4" sx={{ color: "white" }}>
             Checkout
           </Typography>
         </Title>

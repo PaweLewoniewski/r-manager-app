@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
 import { CardCart } from "../../components/CartCard/CartCard";
-import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { useQuery } from "@tanstack/react-query";
+import { getFoodMenu } from "../../queries/queries";
+
+type CartItemProps = {
+  id: number;
+  quantity: number;
+};
 
 export const CartStep = () => {
+  const { cartItems } = useShoppingCart();
 
-  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart();
+  const [cartItem, setCartItem] = useState<any[]>();
+
+  const { refetch, status, data } = useQuery({
+    queryKey: ["MenuFoodData"],
+    queryFn: () => getFoodMenu("dinner"),
+    // placeholderData: placeholdercardData,
+    onSuccess: (data) => {
+      setCartItem(data);
+    },
+  });
+
+  if (status === "loading") return <div>Loading...</div>;
+
+  if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Wrapper>
       <ContentPage>
         <Title>
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography component={"span"} sx={{ color: "white" }}>
             Your Cart
           </Typography>
         </Title>
@@ -22,15 +43,17 @@ export const CartStep = () => {
       </ContentPage>
     </Wrapper>
   );
-}
-
+};
 
 const Wrapper = styled.div`
-
+  display: flex;
+  width: 100%;
 `;
 
 const ContentPage = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const Title = styled.div`
@@ -46,5 +69,5 @@ const ContentBox = styled.div`
   justify-content: flex-start;
   border-bottom: 1px solid white;
   width: 100%;
-  padding:5px;
+  padding: 5px;
 `;

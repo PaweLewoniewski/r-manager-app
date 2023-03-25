@@ -11,20 +11,26 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Badge from "@mui/material/Badge";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 
-const pages = [
-  { name: "Menu", link: "/", disabled: false },
-  // { name: "About", link: "/about", disabled: false },
-  { name: "Kitchen", link: "/kitchen", disabled: false },
-  { name: "Cart", link: "/cart", disabled: false },
-];
+
+
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const MainMenuNav = () => {
+
+  const  { cartQuantity } = useShoppingCart();
+  const pages = [
+    { id: 1, name: "Menu", link: "/", disabled: false },
+    { id: 2, name: "Kitchen", link: "/kitchen", disabled: false },
+    { id: 3, name: <Badge badgeContent={cartQuantity} color="error"><ShoppingCartOutlinedIcon /></Badge>, link: "/cart", disabled: false },
+  ];
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -44,7 +50,7 @@ const MainMenuNav = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#ffffff", zIndex:'5' }}>
+    <AppBar position="static" sx={{ backgroundColor: "#ffffff", zIndex: "5" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -65,7 +71,12 @@ const MainMenuNav = () => {
           >
             Restaurant Menager
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none", justifyContent:'flex-end' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none", justifyContent: "flex-end" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -73,7 +84,7 @@ const MainMenuNav = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              sx={{color:'black'}}
+              sx={{ color: "black" }}
             >
               <MenuIcon />
             </IconButton>
@@ -96,9 +107,16 @@ const MainMenuNav = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
-                </MenuItem>
+                <Link to={page.link}>
+                  <MenuItem key={page.id} onClick={handleCloseNavMenu}>
+                    <Typography
+                      textAlign="center"
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      {page.name}
+                    </Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -110,7 +128,7 @@ const MainMenuNav = () => {
             href=""
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none"},
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
@@ -121,13 +139,25 @@ const MainMenuNav = () => {
           >
             Restaurant Menager
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" , justifyContent:'flex-end'} }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex", justifyContent: "flex-end" },
+            }}
+          >
             {pages.map((page) => (
               <Button
-                key={page.name}
+                key={page.id}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, display: "block"}}
+                sx={{ my: 2, display: "block" }}
                 disabled={page.disabled}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: "10px",
+                }}
+                // variant='outlined'
               >
                 <Link to={page.link}>{page.name}</Link>
               </Button>
@@ -171,8 +201,8 @@ const MainMenuNav = () => {
 
 export default MainMenuNav;
 
-const MenuWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  background-color: #15171e;
-`;
+// const MenuWrapper = styled.div`
+//   display: flex;
+//   width: 100%;
+//   background-color: #15171e;
+// `;

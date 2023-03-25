@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -12,11 +12,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-type CardCartProps = {
-  onClick: () => void;
-};
-
 export const CardCart = () => {
+
   return (
     <Card
       sx={{
@@ -37,11 +34,22 @@ export const CardCart = () => {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          justifyContent: "center",
+          justifyContent: "flex-start",
         }}
       >
-        <CardContent sx={{ padding: "5px" }}>
-          <Typography variant="h5">Meat Title</Typography>
+        <CardContent
+          style={{ padding: "5px", display: "flex", flexDirection: "column" }}
+        >
+          <Typography component={"span"} variant="h5">
+            Meat Title
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="span"
+          >
+            description
+          </Typography>
         </CardContent>
       </Box>
       <Box
@@ -59,8 +67,17 @@ export const CardCart = () => {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6">Wait Time</Typography>
-            <Typography variant="h6">45 min </Typography>
+            <Typography>Wait Time</Typography>
+            <Typography>45 min </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography>Price:</Typography>
+            <Typography>$12.20</Typography>
           </Box>
           <Box
             sx={{
