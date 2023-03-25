@@ -15,7 +15,7 @@ export interface DataFoodMenu {
 }
 
 export interface CategoryData {
-  id?: number;
+  id: number;
   attributes: DataFoodMenu;
 }
 
@@ -31,6 +31,7 @@ export const FoodMenu = () => {
     // placeholderData: placeholdercardData,
     onSuccess: (data) => {
       setFoodCards(data), setEnterAnimation(true);
+      console.log(foodCards)
     },
   });
 
@@ -56,13 +57,13 @@ export const FoodMenu = () => {
             {foodCards !== undefined
               ? foodCards.map(
                   ({
+                    id,
                     attributes: {
                       title,
                       description,
                       image: {
                         data: [
                           {
-                            id,
                             attributes: { url },
                           },
                         ],
@@ -71,7 +72,7 @@ export const FoodMenu = () => {
                   }: CategoryData) => (
                     <ListCard
                       key={id}
-                      data={{ title, description, url }}
+                      data={{ title, description, url, id }}
                       atLocation={false}
                     />
                   )

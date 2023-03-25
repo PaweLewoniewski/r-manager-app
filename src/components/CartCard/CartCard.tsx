@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Button,
@@ -8,9 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import BgCategory from "../../assets/img/categorymenu.webp";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+
+type CardCartProps = {
+  onClick: () => void;
+};
 
 export const CardCart = () => {
   return (
@@ -28,7 +32,14 @@ export const CardCart = () => {
         image={BgCategory}
         alt="Food Example Image"
       />
-      <Box sx={{ display: "flex", flexDirection: "column", width: "100%", justifyContent:"center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
         <CardContent sx={{ padding: "5px" }}>
           <Typography variant="h5">Meat Title</Typography>
         </CardContent>
@@ -48,27 +59,27 @@ export const CardCart = () => {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant='h6'>Wait Time</Typography>
-            <Typography variant='h6'>45 min </Typography>
+            <Typography variant="h6">Wait Time</Typography>
+            <Typography variant="h6">45 min </Typography>
           </Box>
           <Box
             sx={{
               display: "flex",
-              justifyContent:"space-between",
+              justifyContent: "space-between",
               paddingTop: "15px",
             }}
           >
             <Box
               sx={{
                 display: "flex",
-                justifyContent: 'flex-start',
-                alignItems: 'center'
+                justifyContent: "flex-start",
+                alignItems: "center",
               }}
             >
               <Button variant="outlined" color="primary">
                 <AddIcon />
               </Button>
-              <Typography style={{ padding: '10px' }}> 1 </Typography>
+              <Typography style={{ padding: "10px" }}> 1 </Typography>
               <Button variant="outlined" color="primary">
                 <RemoveIcon />
               </Button>

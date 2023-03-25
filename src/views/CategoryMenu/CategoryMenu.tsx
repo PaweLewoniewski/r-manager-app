@@ -41,7 +41,7 @@ export const CategoryMenu = () => {
     },
   });
   console.log(categoryCards);
-  if (status === "loading") return <div>"Loading..."</div>;
+  if (status === "loading") return <div>Loading...</div>;
 
   if (status === "error") return <div>An error has occurred</div>;
 

@@ -11,7 +11,7 @@ import { FoodMenu } from './views/FoodMenu/FoodMenu';
 import { Kitchen } from './views/Kitchen/Kitchen';
 import { MainPage } from "./views/MainPage/MainPage";
 import PageNotFound from "./views/PageNotFound/PageNotFound";
-import { ShoppingCartProvider } from './context/contextShopingCart';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
 
 function App() {
 

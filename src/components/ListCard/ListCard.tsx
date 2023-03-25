@@ -10,29 +10,54 @@ import {
 import { SmallSelectInput } from "../../assets/SmallSelectInput/SmallSelectInput";
 import { tableQuantity } from "../../data/data";
 import { useRef, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 interface ListCardProps {
-  title:string;
-  url:string;
-  description:string;
+  id: number;
+  title: string;
+  url: string;
+  description: string;
 }
 
 type MenuCardType = {
   data: ListCardProps;
   atLocation: boolean;
-}
+};
 
 export const ListCard = ({ data, atLocation }: MenuCardType) => {
   const containerRef = useRef(null);
   const [enterGrowAnimation, setEnterGrowAnimation] = useState(true);
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
 
+  const quantity = getItemQuantity(data.id);
+  console.log(quantity)
   return (
     <div ref={containerRef}>
-      <Slide direction="up" in={enterGrowAnimation} container={containerRef.current} {...(enterGrowAnimation ? { timeout: 500 } : {})}>
-        <Card sx={{ display: "flex", maxWidth:'800px', padding:'10px', margin:'10px' }}>
+      <Slide
+        direction="up"
+        in={enterGrowAnimation}
+        container={containerRef.current}
+        {...(enterGrowAnimation ? { timeout: 500 } : {})}
+      >
+        <Card
+          sx={{
+            display: "flex",
+            maxWidth: "800px",
+            padding: "10px",
+            margin: "10px",
+          }}
+        >
           <CardMedia
             component="img"
-            sx={{ width: 151 }}
+            sx={{ width: 151, objectFit: "cover" }}
             image={data.url}
             alt="Food Example Image"
           />
@@ -55,6 +80,7 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
               display: "flex",
               flexDirection: "column",
               borderLeft: "1px solid black",
+              width: "100%",
             }}
           >
             <CardContent>
@@ -79,10 +105,53 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  paddingTop: "20px",
                 }}
               >
-                <SmallSelectInput valueData={tableQuantity} name={"Quantity"} />
+                {quantity === 0 ? (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => increaseCartQuantity(data.id)}
+                  >
+                    Order
+                  </Button>
+                ) : (
+                  <Box style={{ display: "flex", flexDirection: "column" }}>
+                    <Box style={{ display: "flex", padding: "10px" }}>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => increaseCartQuantity(data.id)}
+                      >
+                        <AddIcon />
+                      </Button>
+                      <Typography style={{ padding: "10px" }}>
+                        {quantity}
+                      </Typography>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => decreaseCartQuantity(data.id)}
+                      >
+                        <RemoveIcon />
+                      </Button>
+                    </Box>
+                    <Box
+                      style={{
+                        display: "flex",
+                        padding: "10px",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <Button variant="outlined" color="error" onClick={() => removeFromCart(data.id)}>
+                        <DeleteForeverIcon />
+                      </Button>
+                    </Box>
+                  </Box>
+                )}
               </Box>
               {atLocation ? (
                 <Box
@@ -96,17 +165,6 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
               ) : (
                 []
               )}
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  paddingTop: "15px",
-                }}
-              >
-                <Button variant="contained" color="success">
-                  Order
-                </Button>
-              </Box>
             </CardContent>
           </Box>
         </Card>

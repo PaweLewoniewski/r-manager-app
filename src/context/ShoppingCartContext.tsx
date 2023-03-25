@@ -19,34 +19,35 @@ type ShoppingCartContext = {
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
 
-export const useShoppingCart = () => {
+export function useShoppingCart() {
     return useContext(ShoppingCartContext)
 }
 
-export const ShoppingCartProvider = ({ children }: ShopingCartProviderProps) => {
+export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartItem[]>([])
 
-    const getItemQuantity = (id: number) => {
+    function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0
     }
 
-    const increaseCartQuantity = (id: number) => {
-        setCartItems(items => {
-            if (items.find(item => item.id === id) === null) {
-                return [...items, { id, quantity: 1 }]
+    function increaseCartQuantity(id: number) {
+        setCartItems(currItems => {
+            if (currItems.find(item => item.id === id) === null) {
+                return [...currItems, { id, quantity: 1 }]
             } else {
-                return items.map(item => {
+                return currItems.map(item => {
                     if (item.id === id) {
                         return { ...item, quantity: item.quantity + 1 }
                     } else {
-                        return item
+                        return item;
                     }
                 })
             }
         })
+        console.log(cartItems);
     }
 
-    const decreaseCartQuantity = (id: number) => {
+    function decreaseCartQuantity(id: number) {
         setCartItems(items => {
             if (items.find(item => item.id === id)?.quantity === 1) {
                 return items.filter(item => item.id !== id)
@@ -62,7 +63,7 @@ export const ShoppingCartProvider = ({ children }: ShopingCartProviderProps) => 
         })
     }
 
-    const removeFromCart = (id: number) => {
+    function removeFromCart(id: number) {
         setCartItems(items => {
             return items.filter(item => item.id !== id)
         })
