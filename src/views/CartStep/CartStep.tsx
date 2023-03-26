@@ -3,31 +3,9 @@ import { Typography } from "@mui/material";
 import styled from "styled-components";
 import { CardCart } from "../../components/CartCard/CartCard";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import { useQuery } from "@tanstack/react-query";
-import { getFoodMenu } from "../../queries/queries";
-
-type CartItemProps = {
-  id: number;
-  quantity: number;
-};
 
 export const CartStep = () => {
   const { cartItems } = useShoppingCart();
-
-  const [cartItem, setCartItem] = useState<any[]>();
-
-  const { refetch, status, data } = useQuery({
-    queryKey: ["MenuFoodData"],
-    queryFn: () => getFoodMenu("dinner"),
-    // placeholderData: placeholdercardData,
-    onSuccess: (data) => {
-      setCartItem(data);
-    },
-  });
-
-  if (status === "loading") return <div>Loading...</div>;
-
-  if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Wrapper>
@@ -38,7 +16,9 @@ export const CartStep = () => {
           </Typography>
         </Title>
         <ContentBox>
-          <CardCart />
+          {cartItems !== undefined
+            ? cartItems.map((item) => <CardCart key={item.id} {...item} />)
+            : ""}
         </ContentBox>
       </ContentPage>
     </Wrapper>
@@ -60,14 +40,13 @@ const Title = styled.div`
   display: flex;
   justify-content: flex-start;
   border-bottom: 1px solid white;
-  width: 100%;
   margin: 20px 5px;
 `;
 
 const ContentBox = styled.div`
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
   border-bottom: 1px solid white;
-  width: 100%;
   padding: 5px;
 `;

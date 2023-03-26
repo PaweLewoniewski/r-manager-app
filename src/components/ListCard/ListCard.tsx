@@ -34,7 +34,6 @@ export const ListCard = ({ data, atLocation }: MenuCardType) => {
     getItemQuantity,
     increaseCartQuantity,
     decreaseCartQuantity,
-    removeFromCart,
   } = useShoppingCart();
 
   const quantity = getItemQuantity(data.id);

@@ -101,7 +101,7 @@ export const Checkout = () => {
               </Box>
             ) : (
               <Box>
-                <Typography>{getStepContent(activeStep)}</Typography>
+                <Box>{getStepContent(activeStep)}</Box>
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   <Box sx={{ padding: "10px" }}>
                     <Button
@@ -171,5 +171,5 @@ const Title = styled.div`
   justify-content: flex-start;
   border-bottom: 1px solid white;
   width: 100%;
-  margin: 20px 5px;
+  margin: 20px 0px;
 `;

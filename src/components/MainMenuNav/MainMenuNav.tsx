@@ -30,7 +30,7 @@ const MainMenuNav = () => {
     { id: 2, name: "Kitchen", link: "/kitchen", disabled: false },
     { id: 3, name: <Badge badgeContent={cartQuantity} color="error"><ShoppingCartOutlinedIcon /></Badge>, link: "/cart", disabled: false },
   ];
-
+  
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -107,8 +107,8 @@ const MainMenuNav = () => {
               }}
             >
               {pages.map((page) => (
-                <Link to={page.link}>
-                  <MenuItem key={page.id} onClick={handleCloseNavMenu}>
+                <Link key={page.id} to={page.link}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography
                       textAlign="center"
                       style={{ display: "flex", justifyContent: "center" }}

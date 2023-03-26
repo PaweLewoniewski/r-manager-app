@@ -15,7 +15,7 @@ export interface CategoryCardData {
 }
 
 export interface CategoryData {
-  id?: number;
+  id: number;
   attributes: CategoryCardData;
 }
 
