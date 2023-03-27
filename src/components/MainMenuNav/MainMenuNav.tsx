@@ -26,9 +26,9 @@ const MainMenuNav = () => {
 
   const  { cartQuantity } = useShoppingCart();
   const pages = [
-    { id: 1, name: "Menu", link: "/", disabled: false },
-    { id: 2, name: "Kitchen", link: "/kitchen", disabled: false },
-    { id: 3, name: <Badge badgeContent={cartQuantity} color="error"><ShoppingCartOutlinedIcon /></Badge>, link: "/cart", disabled: false },
+    { id: 1, name: "Menu", link: "/", disabled: false, rounded:false },
+    { id: 2, name: "Kitchen", link: "/kitchen", disabled: false, rounded:false },
+    { id: 3, name: <Badge badgeContent={cartQuantity} color="error"><ShoppingCartOutlinedIcon /></Badge>, link: "/cart", disabled: false, rounded:true },
   ];
   
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -53,7 +53,6 @@ const MainMenuNav = () => {
     <AppBar position="static" sx={{ backgroundColor: "#ffffff", zIndex: "5" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -120,7 +119,6 @@ const MainMenuNav = () => {
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -149,7 +147,13 @@ const MainMenuNav = () => {
               <Button
                 key={page.id}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, display: "block" }}
+                sx={{ my: 2, display: "flex",
+                  ':nth-last-child(-n + 1)': {
+                    border: '1px solid orange',
+                    borderRadius:'50%',
+                    height:'60px'
+                   }
+              }}
                 disabled={page.disabled}
                 style={{
                   display: "flex",
@@ -157,7 +161,6 @@ const MainMenuNav = () => {
                   alignItems: "center",
                   marginLeft: "10px",
                 }}
-                // variant='outlined'
               >
                 <Link to={page.link}>{page.name}</Link>
               </Button>

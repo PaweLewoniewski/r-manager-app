@@ -53,6 +53,7 @@ export const FoodMenu = () => {
                 {titlePage}
               </Typography>
             </Title>
+            <Listing>
             {foodCards !== undefined
               ? foodCards.map(
                   ({
@@ -77,6 +78,7 @@ export const FoodMenu = () => {
                   )
                 )
               : ""}
+              </Listing>
           </ContentPage>
       </Wrapper>
     </Slide>
@@ -123,4 +125,10 @@ const Title = styled.div`
   border-bottom: 1px solid white;
   width: 100%;
   margin:20px 5px;
+`;
+
+const Listing = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;

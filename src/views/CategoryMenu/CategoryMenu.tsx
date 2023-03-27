@@ -40,8 +40,8 @@ export const CategoryMenu = () => {
       setCategoryCards(data), setEnterAnimation(true);
     },
   });
-  console.log(categoryCards);
-  if (status === "loading") return <div>Loading...</div>;
+
+  if (status === "loading") return <div style={{color:'black'}}>Loading...</div>;
 
   if (status === "error") return <div>An error has occurred</div>;
 
