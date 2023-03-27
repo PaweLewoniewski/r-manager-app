@@ -41,7 +41,7 @@ export const CategoryMenu = () => {
     },
   });
 
-  if (status === "loading") return <div style={{color:'black'}}>Loading...</div>;
+  if (data.title === "loading...") return <div style={{color:'black'}}>Loading...</div>;
 
   if (status === "error") return <div>An error has occurred</div>;
 

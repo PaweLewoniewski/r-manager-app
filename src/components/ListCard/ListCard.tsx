@@ -10,6 +10,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { useLocation } from "react-router-dom";
 
 interface ListCardProps {
   id: number;
@@ -26,11 +27,22 @@ type MenuCardType = {
 export const ListCard = ({ data }: MenuCardType) => {
   const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } =
     useShoppingCart();
+  const { state } = useLocation();
+  const { titlePage } = state;
 
   const quantity = getItemQuantity(data.id);
 
   return (
-    <Card sx={{ maxWidth: 345, margin: "5px", display:'flex', justifyContent:'space-between', flexDirection:'column', padding:'2px' }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: "5px",
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "column",
+        padding: "2px",
+      }}
+    >
       <CardMedia sx={{ height: 140 }} image={data.url} title="food" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -46,7 +58,7 @@ export const ListCard = ({ data }: MenuCardType) => {
             variant="contained"
             size="small"
             color="success"
-            onClick={() => increaseCartQuantity(data.id)}
+            onClick={() => increaseCartQuantity(data.id, titlePage)}
           >
             Order
           </Button>
@@ -56,7 +68,7 @@ export const ListCard = ({ data }: MenuCardType) => {
               variant="outlined"
               color="primary"
               size="small"
-              onClick={() => increaseCartQuantity(data.id)}
+              onClick={() => increaseCartQuantity(data.id, titlePage)}
             >
               <AddIcon />
             </Button>
@@ -65,7 +77,7 @@ export const ListCard = ({ data }: MenuCardType) => {
               variant="outlined"
               color="primary"
               size="small"
-              onClick={() => decreaseCartQuantity(data.id)}
+              onClick={() => decreaseCartQuantity(data.id, titlePage)}
             >
               <RemoveIcon />
             </Button>

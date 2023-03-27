@@ -19,9 +19,10 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 type CartItemProps = {
   id: number;
   quantity: number;
+  storeCategory:string;
 };
 
-export const CardCart = ({ id, quantity }: CartItemProps) => {
+export const CardCart = ({ id, quantity, storeCategory }: CartItemProps) => {
   let itemInCart:CategoryData;
   const [cartItem, setCartItem] = useState<CategoryData[]>();
   const {
@@ -32,11 +33,10 @@ export const CardCart = ({ id, quantity }: CartItemProps) => {
   
   const { refetch, status, data } = useQuery({
     queryKey: ["MenuFoodData"],
-    queryFn: () => getFoodMenu("dinner"),
+    queryFn: () => getFoodMenu(storeCategory),
     onSuccess: (data) => {
       itemInCart = data.find((i: { id: number }) => i.id === id);
       setCartItem([itemInCart]);
-      console.log(cartItem);
     },
   });
 
@@ -145,18 +145,18 @@ export const CardCart = ({ id, quantity }: CartItemProps) => {
                           alignItems: "center",
                         }}
                       >
-                        <Button variant="outlined" color="primary" onClick={() => increaseCartQuantity(id)}>
+                        <Button variant="outlined" color="primary" onClick={() => increaseCartQuantity(id, storeCategory)}>
                           <AddIcon />
                         </Button>
                         <Typography style={{ padding: "10px" }}>
                           {" "}
                           {quantity}{" "}
                         </Typography>
-                        <Button variant="outlined" color="primary" onClick={() => decreaseCartQuantity(id)}>
+                        <Button variant="outlined" color="primary" onClick={() => decreaseCartQuantity(id, storeCategory)}>
                           <RemoveIcon />
                         </Button>
                       </Box>
-                      <Button variant="outlined" color="error" onClick={() => removeFromCart(id)}>
+                      <Button variant="outlined" color="error" onClick={() => removeFromCart(id, storeCategory)}>
                         <DeleteForeverIcon />
                       </Button>
                     </Box>

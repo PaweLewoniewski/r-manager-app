@@ -8,13 +8,14 @@ type ShopingCartProviderProps = {
 type CartItem = {
     id: number;
     quantity: number;
+    storeCategory:string;
 }
 
 type ShoppingCartContext = {
     getItemQuantity: (id: number) => number;
-    increaseCartQuantity: (id: number) => void;
-    decreaseCartQuantity: (id: number) => void;
-    removeFromCart: (id: number) => void;
+    increaseCartQuantity: (id: number, storeCategory:string) => void;
+    decreaseCartQuantity: (id: number, storeCategory:string) => void;
+    removeFromCart: (id: number, storeCategory:string) => void;
     cartQuantity:number;
     cartItems:CartItem[];
 }
@@ -35,14 +36,14 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
         return cartItems.find(item => item.id === id)?.quantity || 0;
     }
 
-    function increaseCartQuantity(id: number) {
+    function increaseCartQuantity(id: number, storeCategory:string) {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) === undefined) {
-                return [...currItems, { id, quantity: 1 }]
+                return [...currItems, { id, quantity: 1, storeCategory }]
             } else {
                 return currItems.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1 }
+                        return { ...item, quantity: item.quantity + 1 ,storeCategory }
                     } else {
                         return item;
                     }
@@ -51,14 +52,14 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
         })
     }
 
-    function decreaseCartQuantity(id: number) {
+    function decreaseCartQuantity(id: number,storeCategory:string) {
         setCartItems(items => {
             if (items.find(item => item.id === id)?.quantity === 1) {
                 return items.filter(item => item.id !== id)
             } else {
                 return items.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity - 1 }
+                        return { ...item, quantity: item.quantity - 1, storeCategory }
                     } else {
                         return item
                     }
