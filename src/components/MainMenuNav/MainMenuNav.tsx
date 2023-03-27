@@ -148,7 +148,7 @@ const MainMenuNav = () => {
                 key={page.id}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, display: "flex",
-                  ':nth-last-child(-n + 1)': {
+                  '&:nth-last-of-type(-n + 1)': {
                     border: '1px solid orange',
                     borderRadius:'50%',
                     height:'60px'
