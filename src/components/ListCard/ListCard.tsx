@@ -38,7 +38,7 @@ export const ListCard = ({ data }: MenuCardType) => {
         maxWidth: 345,
         margin: "5px",
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         flexDirection: "column",
         padding: "2px",
       }}
