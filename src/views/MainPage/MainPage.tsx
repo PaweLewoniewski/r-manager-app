@@ -50,6 +50,7 @@ export const MainPage = () => {
                 to={"/category"}
                 style={{
                   width: "100%",
+                  height:'100%',
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -78,6 +79,7 @@ export const MainPage = () => {
                 to={"/category"}
                 style={{
                   width: "100%",
+                  height:'100%',
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -111,11 +113,12 @@ const Wrapper = styled.div`
   background-position: center;
   background-size: cover;
   margin:5px;
+  overflow: hidden;
 `;
 
 const NavBox = styled.span`
   width: 100%;
-  height: 50%;
+  height: 100%;
   display: flex;
   padding: 15px;
   border-radius: 2px;
@@ -155,13 +158,14 @@ const ContentPage = styled.div`
 
 const LinkBoxLeft = styled.div`
   width: 100%;
+  height:100%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
   transform: perspective(200px) rotateY(0deg);
   overflow: hidden;
-  padding:15px;
+  /* padding:15px; */
   &:hover {
     transition: all 0.3s ease-in-out;
     transform: perspective(200px) rotateY(3deg);
@@ -170,13 +174,14 @@ const LinkBoxLeft = styled.div`
 
 const LinkBoxRight = styled.div`
   width: 100%;
+  height:100%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
   transform: perspective(200px) rotateY(360deg);
   overflow: hidden;
-  padding:15px;
+  /* padding:15px; */
   &:hover {
     transition: all 0.3s ease-in-out;
     transform: perspective(200px) rotateY(357deg);

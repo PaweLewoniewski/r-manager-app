@@ -68,7 +68,7 @@ const MainMenuNav = () => {
               textDecoration: "none",
             }}
           >
-            Restaurant Menager
+            Restaurant Menager 0.5.4
           </Typography>
           <Box
             sx={{

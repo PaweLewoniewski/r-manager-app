@@ -56,5 +56,5 @@ const Content = styled.div`
   /* max-width:1488px; */
   /* padding:24px; */
   /* min-height:100vh; */
-  min-height: calc(100vh - 70px); ;
+  min-height: calc(100vh - 100px); ;
 `;
