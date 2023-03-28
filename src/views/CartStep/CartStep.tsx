@@ -3,6 +3,9 @@ import { Typography } from "@mui/material";
 import styled from "styled-components";
 import { CardCart } from "../../components/CartCard/CartCard";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { formatCurrency } from "../../utilities/formatCurrency";
+// import shopStoreItems from "../data/database.json";
+import { pageHelper } from "../../queries/queryHelper";
 
 export const CartStep = () => {
   const { cartItems } = useShoppingCart();
@@ -20,6 +23,14 @@ export const CartStep = () => {
             ? cartItems.map((item) => <CardCart key={item.id} {...item} />)
             : ""}
         </ContentBox>
+        <SummaryPrice>
+          <Typography component={"span"} sx={{ color: "white" }} variant="h6">
+            {formatCurrency(cartItems.reduce((total, cartItem) => {
+              const item = pageHelper(cartItem.storeCategory).find(i => i.id === cartItem.id)
+              return total + (item?.price || 0) * cartItem.quantity
+            }, 0))}
+          </Typography>
+        </SummaryPrice>
       </ContentPage>
     </Wrapper>
   );
@@ -49,4 +60,10 @@ const ContentBox = styled.div`
   flex-direction: column;
   border-bottom: 1px solid white;
   padding: 5px;
+`;
+
+const SummaryPrice = styled.div`
+  display:flex;
+  justify-content:flex-end;
+  padding:10px 0px;
 `;
