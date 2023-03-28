@@ -1,10 +1,12 @@
-import { Collapse, Slide, Typography } from "@mui/material";
+import React, { useEffect, useRef, useState  } from "react";
+import { Slide, Typography } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BgMain from "../../assets/img/restaurant.webp";
 import { getCategories } from "../../queries/queries";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export const MainPage = () => {
   const [enterAnimation, setEnterAnimation] = useState(false);
@@ -60,9 +62,9 @@ export const MainPage = () => {
                 <NavBox>
                   <Typography
                     fontSize={"3.5rem"}
-                    sx={{ color: "white", transition: "all 0.3s ease-in-out" }}
+                    sx={{ color: "black", transition: "all 0.3s ease-in-out",display:'flex', alignItems:'center' }}
                   >
-                    Takeaway
+                    <ArrowBackIosIcon sx={{fontSize:'0.7em'}} />Takeaway
                   </Typography>
                 </NavBox>
               </Link>
@@ -89,9 +91,9 @@ export const MainPage = () => {
                 <NavBox>
                   <Typography
                     fontSize={"3.5rem"}
-                    sx={{ color: "white", transition: "all 0.3s ease-in-out" }}
+                    sx={{ color: "black", transition: "all 0.3s ease-in-out", display:'flex', alignItems:'center' }}
                   >
-                    At location
+                    At location<ArrowForwardIosIcon sx={{fontSize:'0.7em'}}/>
                   </Typography>
                 </NavBox>
               </Link>
@@ -117,20 +119,21 @@ const Wrapper = styled.div`
 `;
 
 const NavBox = styled.span`
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   display: flex;
-  padding: 15px;
-  border-radius: 2px;
-  border: 1px solid white;
+  padding: 25px;
+  border-radius: 15px;
+  background:white;
+  /* border: 1px solid white; */
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.5);
+  /* backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.5); */
   transition: all 0.3s ease-in-out;
   &:hover {
     transition: all 0.3s ease-in-out;
-    background-color: rgba(255, 255, 255, 0.2);
+    background:white;
   }
   &:hover p {
     transition: all 0.3s ease-in-out;

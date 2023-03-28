@@ -1,7 +1,7 @@
 import axios from "axios";
 import { queryHelper } from "./queryHelper";
 
-const queryCategoriesMenu: string = `https://restaurant-menager-strapi.onrender.com/api/menus?populate=*`;
+const queryCategoriesMenu = `https://restaurant-menager-strapi.onrender.com/api/menus?populate=*`;
 // const queryDinners: string = `https://restaurant-menager-strapi.onrender.com/api/dinners?populate=*`;
 // const queryApi: string = `https://restaurant-menager-strapi.onrender.com/api/`;
 

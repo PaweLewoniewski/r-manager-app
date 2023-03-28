@@ -1,0 +1,84 @@
+{
+    "menu":[
+        {"title":"Breakfasts"},
+        {"title":"Lunches"},
+        {"title":"Dinners"}
+    ],
+    "breakfasts": [
+        {
+            "title": "Mixed bean salad",
+            "description": "Grab that tin of beans from the back of your store cupboard and whip up this simple bean salad.",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1679405252/small_lunch2_ca2e700b51.jpg",
+            "id": 2,
+            "price": 18.30
+        },
+        {
+            "title": "Scrambled eggs",
+            "description": "This has to be one of the most sublime combinations: soft, creamy scrambled eggs, together with the subtle, smoky flavour of the salmon.",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1679404485/small_lunch1_eb17f136c9.jpg",
+            "id": 3,
+            "price": 15.20
+        },
+        {
+            "title": "Club sandwich",
+            "description": "A club sandwich is a thing of beauty. You can fancy it up with extra fillings like avocado, mustard, thinly sliced red onion, but you can also keep it simple. This double layer sandwich is definitely filling enough for dinner with a side of soup or some crispy chips.",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1679405170/small_lunch3_086c479f71.jpg",
+            "id": 1,
+            "price": 14.90
+        }
+    ],
+    "lunches": [
+        {
+            "title": "Fish curry",
+            "description": "Rohu is commonly eaten in Bangladesh and is known as the king of fish. It can be difficult to source, but the recipe also works well with monkfish (which is similar in flavour and texture) or any firm white fish – just reduce the cooking time a little if the fish pieces are smaller.",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1679405360/small_breakfast2_a1b43571db.jpg",
+            "id": 7,
+            "price": 21.40
+        },
+        {
+            "title": "One-pan sausage pasta",
+            "description": "One pack of sausages will easily feed up to six people if you squeeze the meat out of the skins and cook with pasta and a rich tasting tomato sauce. You’ll need a large pan to cook everything as it all simmers together. Leftovers can be warmed up the next day or frozen for up to a month.",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1679405332/small_breakfast1_658547b87a.jpg",
+            "id": 8,
+            "price": 19.80
+        },
+        {
+            "title": "Spiced cod fish cakes",
+            "description": "Serve these spiced cod fish cakes with chutney and salad as a light meal or an indulgent starter.",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1679405435/small_breakfast3_022ca42a03.jpg",
+            "id": 9,
+            "price": 17.35
+        }
+    ],
+    "dinners": [
+        {
+            "description": "Steak and Cajun potatoes make a tasty meal for two – perfect for special occasions like Valentine's",
+            "title": "Fresh Meat",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1678283347/small_dinner1_5ce8f7911c.jpg",
+            "id": 4,
+            "price": 25.80
+        },
+        {
+            "description": "Our healthy vegan chilli recipe packs in plenty of vegetables and doesn’t fall short on the flavour front. Serve it with rice or in jacket potatoes for a filling supper",
+            "title": "Green Auguolia",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1678283513/small_dinner3_3c6d8e2ca5.jpg",
+            "id": 5,
+            "price": 1.20
+        },
+        {
+            "description": "Get three of your 5-a-day in one serving with this healthy, low-calorie tomato soup. The addition of meatballs and giant couscous means it's filling, too",
+            "title": "Meatballs",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1678283415/small_dinner2_0addd3f5d4.jpg",
+            "id": 6,
+            "price": 21.40
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 25,
+            "pageCount": 1,
+            "total": 3
+        }
+    }
+}
