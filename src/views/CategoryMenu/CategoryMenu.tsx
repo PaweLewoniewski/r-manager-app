@@ -8,19 +8,6 @@ import { MenuCard } from "../../components/MenuCard/MenuCard";
 import { ImageNestedData } from "../../data/dataTypes";
 import shopStoreItems from "../../data/database.json";
 
-// import { getCategories } from "../../queries/queries";
-// import { useQuery } from "@tanstack/react-query";
-
-// const placeholdercardData = {
-//   title: "Loading...",
-//   url: `${BgCategory}`,
-// };
-
-// export interface CategoryData {
-//   id: number;
-//   attributes: CategoryCardData;
-// }
-
 export interface CategoryCardData {
   title: string;
   image: ImageNestedData;
@@ -45,19 +32,6 @@ export const CategoryMenu = () => {
     setCategoryCards(shopStoreItems.menu);
     setEnterAnimation(true);
   }, [categoryCards])
-
-  // const { refetch, status, data } = useQuery({
-  //   queryKey: ["MenuCategoriesData"],
-  //   queryFn: getCategories,
-  //   placeholderData: placeholdercardData,
-  //   onSuccess: (data) => {
-  //     setCategoryCards(data), setEnterAnimation(true);
-  //   },
-  // });
-
-  // if (data.title === "loading...") return <div style={{color:'black'}}>Loading...</div>;
-
-  // if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Slide
@@ -126,6 +100,28 @@ const ContentPage = styled.div`
   }
 `;
 
+// const placeholdercardData = {
+//   title: "Loading...",
+//   url: `${BgCategory}`,
+// };
+
+// export interface CategoryData {
+//   id: number;
+//   attributes: CategoryCardData;
+// }
+
+  // const { refetch, status, data } = useQuery({
+  //   queryKey: ["MenuCategoriesData"],
+  //   queryFn: getCategories,
+  //   placeholderData: placeholdercardData,
+  //   onSuccess: (data) => {
+  //     setCategoryCards(data), setEnterAnimation(true);
+  //   },
+  // });
+
+  // if (data.title === "loading...") return <div style={{color:'black'}}>Loading...</div>;
+
+  // if (status === "error") return <div>An error has occurred</div>;
 
 {/* <ContentPage>
 {categoryCards !== undefined

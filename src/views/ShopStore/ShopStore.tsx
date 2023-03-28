@@ -5,20 +5,6 @@ import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { ListCard } from "../../components/ListCard/ListCard";
 import { pageHelper } from '../../queries/queryHelper';
-// import { ImageNestedData } from "../../data/dataTypes";
-// import { getFoodMenu } from "../../queries/queries";
-// import { useQuery } from "@tanstack/react-query";
-
-// export interface DataFoodMenu {
-//   title: string;
-//   description: string;
-//   image: ImageNestedData;
-// }
-
-// export interface CategoryData {
-//   id: number;
-//   attributes: DataFoodMenu;
-// }
 
 interface ShopStoreItem {
   id:number;
@@ -39,19 +25,6 @@ export const ShopStore = () => {
       setStoreCards(pageHelper(titlePage));
       setEnterAnimation(true);
   },[storeCards])
-
-  // const { refetch, status, data } = useQuery({
-  //   queryKey: ["MenuFoodData"],
-  //   queryFn: () => getFoodMenu(titlePage),
-  //   // placeholderData: placeholdercardData,
-  //   onSuccess: (data) => {
-  //     setStoreCards(data), setEnterAnimation(true);
-  //   },
-  // });
-
-  // if (status === "loading") return <div>Loading...</div>;
-
-  // if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Slide
@@ -134,6 +107,29 @@ const Listing = styled.div`
   flex-wrap: wrap;
 `;
 
+// export interface DataFoodMenu {
+//   title: string;
+//   description: string;
+//   image: ImageNestedData;
+// }
+
+// export interface CategoryData {
+//   id: number;
+//   attributes: DataFoodMenu;
+// }
+
+  // const { refetch, status, data } = useQuery({
+  //   queryKey: ["MenuFoodData"],
+  //   queryFn: () => getFoodMenu(titlePage),
+  //   // placeholderData: placeholdercardData,
+  //   onSuccess: (data) => {
+  //     setStoreCards(data), setEnterAnimation(true);
+  //   },
+  // });
+
+  // if (status === "loading") return <div>Loading...</div>;
+
+  // if (status === "error") return <div>An error has occurred</div>;
 
 {/* <Listing>
 {storeCards !== undefined

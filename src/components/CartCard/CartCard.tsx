@@ -11,9 +11,6 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-// import { useQuery } from "@tanstack/react-query";
-// import { getFoodMenu } from "../../queries/queries";
-// import { CategoryData } from "../../views/ShopStore/ShopStore";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { pageHelper } from "../../queries/queryHelper";
 
@@ -34,26 +31,6 @@ export const CardCart = ({ id, quantity, storeCategory }: CartItemProps) => {
   const itemInCart = pageHelper(storeCategory).find(i => i.id === id);
   if (itemInCart === undefined) return null;
   
-  // useEffect(() => {
-  //   if (itemInCart !== undefined) {
-  //     setCartItem([itemInCart]);
-  //   }
-  // }, [cartItem, itemInCart])
-
-
-  // const { refetch, status, data } = useQuery({
-  //   queryKey: ["MenuFoodData"],
-  //   queryFn: () => getFoodMenu(storeCategory),
-  //   onSuccess: (data) => {
-  //     itemInCart = data.find((i: { id: number }) => i.id === id);
-  //     setCartItem([itemInCart]);
-  //   },
-  // });
-
-  // if (status === "loading") return <div>Loading...</div>;
-
-  // if (status === "error") return <div>An error has occurred</div>;
-
   return (
     <>
           <Card
@@ -161,6 +138,26 @@ export const CardCart = ({ id, quantity, storeCategory }: CartItemProps) => {
   );
 };
 
+
+  // useEffect(() => {
+  //   if (itemInCart !== undefined) {
+  //     setCartItem([itemInCart]);
+  //   }
+  // }, [cartItem, itemInCart])
+
+
+  // const { refetch, status, data } = useQuery({
+  //   queryKey: ["MenuFoodData"],
+  //   queryFn: () => getFoodMenu(storeCategory),
+  //   onSuccess: (data) => {
+  //     itemInCart = data.find((i: { id: number }) => i.id === id);
+  //     setCartItem([itemInCart]);
+  //   },
+  // });
+
+  // if (status === "loading") return <div>Loading...</div>;
+
+  // if (status === "error") return <div>An error has occurred</div>;
 
 // {cartItem !== undefined
 //   ? cartItem.map(
