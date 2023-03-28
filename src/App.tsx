@@ -7,7 +7,7 @@ import MainMenuNav from "./components/MainMenuNav/MainMenuNav";
 import About from "./views/About/About";
 import { Checkout } from "./views/Checkout/Checkout";
 import { CategoryMenu } from "./views/CategoryMenu/CategoryMenu";
-import { FoodMenu } from "./views/FoodMenu/FoodMenu";
+import { ShopStore } from "./views/ShopStore/ShopStore";
 import { Kitchen } from "./views/Kitchen/Kitchen";
 import { MainPage } from "./views/MainPage/MainPage";
 import PageNotFound from "./views/PageNotFound/PageNotFound";
@@ -24,7 +24,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/category" element={<CategoryMenu />} />
-                <Route path="/food" element={<FoodMenu />} />
+                <Route path="/food" element={<ShopStore />} />
                 {/* <Route path="/about" element={<About />} /> */}
                 <Route path="/kitchen" element={<Kitchen />} />
                 <Route path="/cart" element={<Checkout />} />

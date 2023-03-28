@@ -1,10 +1,22 @@
 {
-    "menu":[
-        {"title":"Breakfasts"},
-        {"title":"Lunches"},
-        {"title":"Dinners"}
+    "menu": [
+        {
+            "id":1,
+            "title": "Breakfasts",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1678285830/small_dinner_69b568f083.jpg"
+        },
+        {
+            "id":2,
+            "title": "Lunches",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1678282995/small_lunch0_29950d4b10.jpg"
+        },
+        {
+            "id":3,
+            "title": "Dinners",
+            "url": "https://res.cloudinary.com/ddsojujqw/image/upload/v1678282905/small_break_fbe7bde5ee.jpg"
+        }
     ],
-    "breakfasts": [
+    "Breakfasts": [
         {
             "title": "Mixed bean salad",
             "description": "Grab that tin of beans from the back of your store cupboard and whip up this simple bean salad.",
@@ -27,7 +39,7 @@
             "price": 14.90
         }
     ],
-    "lunches": [
+    "Lunches": [
         {
             "title": "Fish curry",
             "description": "Rohu is commonly eaten in Bangladesh and is known as the king of fish. It can be difficult to source, but the recipe also works well with monkfish (which is similar in flavour and texture) or any firm white fish – just reduce the cooking time a little if the fish pieces are smaller.",
@@ -50,7 +62,7 @@
             "price": 17.35
         }
     ],
-    "dinners": [
+    "Dinners": [
         {
             "description": "Steak and Cajun potatoes make a tasty meal for two – perfect for special occasions like Valentine's",
             "title": "Fresh Meat",

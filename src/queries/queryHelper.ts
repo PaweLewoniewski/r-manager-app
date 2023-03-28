@@ -1,3 +1,5 @@
+import shopStoreItems from "../data/database.json";
+
 export const queryHelper = (foodType: string) => {
     switch (foodType) {
       case "Dinner":
@@ -10,3 +12,16 @@ export const queryHelper = (foodType: string) => {
         return `https://restaurant-menager-strapi.onrender.com/api/dinners?populate=*`;
     }
   };
+
+  export const pageHelper = (foodType: string) => {
+    switch (foodType) {
+      case "Dinners":
+        return shopStoreItems.Dinners;
+      case "Breakfasts":
+        return shopStoreItems.Breakfasts;
+      case "Lunches":
+        return shopStoreItems.Lunches;
+      default:
+        return shopStoreItems.Dinners;
+    }
+  };  

@@ -1,29 +1,29 @@
 import React, { useEffect, useRef, useState  } from "react";
 import { Slide, Typography } from "@mui/material";
-import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BgMain from "../../assets/img/restaurant.webp";
-import { getCategories } from "../../queries/queries";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import { getCategories } from "../../queries/queries";
+// import { useQueryClient } from "@tanstack/react-query";
 
 export const MainPage = () => {
   const [enterAnimation, setEnterAnimation] = useState(false);
 
   const containerRef = useRef(null);
-  const queryClient = useQueryClient();
-  queryClient.prefetchQuery({
-    queryKey: ["MenuCategoriesData"],
-    queryFn: () => getCategories(),
-  });
+  //const queryClient = useQueryClient();
+  // queryClient.prefetchQuery({
+  //   queryKey: ["MenuCategoriesData"],
+  //   queryFn: () => getCategories(),
+  // });
 
-  const onHoverPrefetch = () => {
-    queryClient.prefetchQuery({
-      queryKey: ["MenuCategoriesData"],
-      queryFn: () => getCategories(),
-    });
-  };
+  // const onHoverPrefetch = () => {
+  //   queryClient.prefetchQuery({
+  //     queryKey: ["MenuCategoriesData"],
+  //     queryFn: () => getCategories(),
+  //   });
+  // };
 
   useEffect(() => {
     setTimeout(() => {
@@ -57,7 +57,7 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onMouseEnter={onHoverPrefetch}
+                // onMouseEnter={onHoverPrefetch}
               >
                 <NavBox>
                   <Typography
@@ -86,7 +86,7 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onMouseEnter={onHoverPrefetch}
+                // onMouseEnter={onHoverPrefetch}
               >
                 <NavBox>
                   <Typography

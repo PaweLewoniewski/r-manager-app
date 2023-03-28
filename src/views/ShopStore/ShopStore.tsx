@@ -1,42 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Slide, Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { ListCard } from "../../components/ListCard/ListCard";
-import { ImageNestedData } from "../../data/dataTypes";
-import { getFoodMenu } from "../../queries/queries";
+import { pageHelper } from '../../queries/queryHelper';
+// import { ImageNestedData } from "../../data/dataTypes";
+// import { getFoodMenu } from "../../queries/queries";
+// import { useQuery } from "@tanstack/react-query";
 
-export interface DataFoodMenu {
-  title: string;
-  description: string;
-  image: ImageNestedData;
+// export interface DataFoodMenu {
+//   title: string;
+//   description: string;
+//   image: ImageNestedData;
+// }
+
+// export interface CategoryData {
+//   id: number;
+//   attributes: DataFoodMenu;
+// }
+
+interface ShopStoreItem {
+  id:number;
+  title:string;
+  url:string;
+  description:string;
+  price:number;
 }
 
-export interface CategoryData {
-  id: number;
-  attributes: DataFoodMenu;
-}
-
-export const FoodMenu = () => {
+export const ShopStore = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
-  const [foodCards, setFoodCards] = useState<any[]>();
+  const [storeCards, setStoreCards] = useState<ShopStoreItem[]>();
   const { state } = useLocation();
   const { titlePage } = state;
 
-  const { refetch, status, data } = useQuery({
-    queryKey: ["MenuFoodData"],
-    queryFn: () => getFoodMenu(titlePage),
-    // placeholderData: placeholdercardData,
-    onSuccess: (data) => {
-      setFoodCards(data), setEnterAnimation(true);
-    },
-  });
 
-  if (status === "loading") return <div>Loading...</div>;
+  useEffect(()=> {
+      setStoreCards(pageHelper(titlePage));
+      setEnterAnimation(true);
+  },[storeCards])
 
-  if (status === "error") return <div>An error has occurred</div>;
+  // const { refetch, status, data } = useQuery({
+  //   queryKey: ["MenuFoodData"],
+  //   queryFn: () => getFoodMenu(titlePage),
+  //   // placeholderData: placeholdercardData,
+  //   onSuccess: (data) => {
+  //     setStoreCards(data), setEnterAnimation(true);
+  //   },
+  // });
+
+  // if (status === "loading") return <div>Loading...</div>;
+
+  // if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Slide
@@ -54,25 +69,11 @@ export const FoodMenu = () => {
               </Typography>
             </Title>
             <Listing>
-            {foodCards !== undefined
-              ? foodCards.map(
-                  ({
-                    id,
-                    attributes: {
-                      title,
-                      description,
-                      image: {
-                        data: [
-                          {
-                            attributes: { url },
-                          },
-                        ],
-                      },
-                    },
-                  }: CategoryData) => (
+            {storeCards !== undefined
+              ? storeCards.map(item => (
                     <ListCard
-                      key={id}
-                      data={{ title, description, url, id }}
+                      key={item.id}
+                      data={item}
                       atLocation={false}
                     />
                   )
@@ -132,3 +133,31 @@ const Listing = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 `;
+
+
+{/* <Listing>
+{storeCards !== undefined
+  ? storeCards.map(
+      ({
+        id,
+        attributes: {
+          title,
+          description,
+          image: {
+            data: [
+              {
+                attributes: { url },
+              },
+            ],
+          },
+        },
+      }: CategoryData) => (
+        <ListCard
+          key={id}
+          data={{ title, description, url, id }}
+          atLocation={false}
+        />
+      )
+    )
+  : ""}
+  </Listing> */}

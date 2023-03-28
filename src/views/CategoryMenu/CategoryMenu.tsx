@@ -1,28 +1,37 @@
+import React, { useEffect, useState } from "react";
 import { Slide } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { StripesShape } from "../../assets/StripesShape/StripesShape";
 import { MenuCard } from "../../components/MenuCard/MenuCard";
 import { ImageNestedData } from "../../data/dataTypes";
-import { getCategories } from "../../queries/queries";
+import shopStoreItems from "../../data/database.json";
+
+// import { getCategories } from "../../queries/queries";
+// import { useQuery } from "@tanstack/react-query";
+
+// const placeholdercardData = {
+//   title: "Loading...",
+//   url: `${BgCategory}`,
+// };
+
+// export interface CategoryData {
+//   id: number;
+//   attributes: CategoryCardData;
+// }
 
 export interface CategoryCardData {
   title: string;
   image: ImageNestedData;
 }
 
-export interface CategoryData {
+interface CategoryData {
   id: number;
-  attributes: CategoryCardData;
+  title: string;
+  url: string;
 }
 
-const placeholdercardData = {
-  title: "Loading...",
-  url: `${BgCategory}`,
-};
 export const CategoryMenu = () => {
   const [categoryCards, setCategoryCards] = useState<CategoryData[]>();
   const [enterAnimation, setEnterAnimation] = useState(false);
@@ -32,18 +41,23 @@ export const CategoryMenu = () => {
     navigate("/food", { state: { titlePage: title } });
   };
 
-  const { refetch, status, data } = useQuery({
-    queryKey: ["MenuCategoriesData"],
-    queryFn: getCategories,
-    placeholderData: placeholdercardData,
-    onSuccess: (data) => {
-      setCategoryCards(data), setEnterAnimation(true);
-    },
-  });
+  useEffect(() => {
+    setCategoryCards(shopStoreItems.menu);
+    setEnterAnimation(true);
+  }, [categoryCards])
 
-  if (data.title === "loading...") return <div style={{color:'black'}}>Loading...</div>;
+  // const { refetch, status, data } = useQuery({
+  //   queryKey: ["MenuCategoriesData"],
+  //   queryFn: getCategories,
+  //   placeholderData: placeholdercardData,
+  //   onSuccess: (data) => {
+  //     setCategoryCards(data), setEnterAnimation(true);
+  //   },
+  // });
 
-  if (status === "error") return <div>An error has occurred</div>;
+  // if (data.title === "loading...") return <div style={{color:'black'}}>Loading...</div>;
+
+  // if (status === "error") return <div>An error has occurred</div>;
 
   return (
     <Slide
@@ -64,27 +78,14 @@ export const CategoryMenu = () => {
         >
           <ContentPage>
             {categoryCards !== undefined
-              ? categoryCards.map(
-                  ({
-                    attributes: {
-                      title,
-                      image: {
-                        data: [
-                          {
-                            id,
-                            attributes: { url },
-                          },
-                        ],
-                      },
-                    },
-                  }: CategoryData) => (
-                    <MenuCard
-                      key={id || 0}
-                      data={{ title, url } || placeholdercardData}
-                      onClick={() => goToCategoryLinkHandler(title)}
-                    />
-                  )
-                )
+              ? categoryCards.map(item => (
+                <MenuCard
+                  key={item.id || 0}
+                  data={item}
+                  onClick={() => goToCategoryLinkHandler(item.title)}
+                />
+              )
+              )
               : ""}
           </ContentPage>
         </Slide>
@@ -110,9 +111,7 @@ const Wrapper = styled.div`
 const ContentPage = styled.div`
   margin: 0 auto;
   width: 100%;
-  /* height: 100%; */
   padding: 20px;
-  /* max-width: 1488px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,3 +125,30 @@ const ContentPage = styled.div`
     height: auto;
   }
 `;
+
+
+{/* <ContentPage>
+{categoryCards !== undefined
+  ? categoryCards.map(
+      ({
+        attributes: {
+          title,
+          image: {
+            data: [
+              {
+                id,
+                attributes: { url },
+              },
+            ],
+          },
+        },
+      }: CategoryData) => (
+        <MenuCard
+          key={id || 0}
+          data={{ title, url } || placeholdercardData}
+          onClick={() => goToCategoryLinkHandler(title)}
+        />
+      )
+    )
+  : ""}
+</ContentPage> */}
