@@ -13,6 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { pageHelper } from "../../queries/queryHelper";
+import { formatCurrency } from "../../utilities/formatCurrency";
 
 type CartItemProps = {
   id: number;
@@ -100,7 +101,7 @@ export const CardCart = ({ id, quantity, storeCategory }: CartItemProps) => {
                   }}
                 >
                   <Typography>Price:</Typography>
-                  <Typography>$12.20</Typography>
+                  <Typography>{formatCurrency(itemInCart.price)}</Typography>
                 </Box>
                 <Box
                   sx={{

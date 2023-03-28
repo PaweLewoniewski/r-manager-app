@@ -1,3 +1,11 @@
+export interface CardProps {
+  id: number;
+  title: string;
+  url: string;
+  description: string;
+  price:number;
+}
+
 export interface inputTableTypes {
     id:number;
     value:string;

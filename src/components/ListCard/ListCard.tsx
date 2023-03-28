@@ -12,16 +12,11 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useLocation } from "react-router-dom";
-
-interface ListCardProps {
-  id: number;
-  title: string;
-  url: string;
-  description: string;
-}
+import { formatCurrency } from '../../utilities/formatCurrency';
+import { CardProps } from '../../data/dataTypes';
 
 type MenuCardType = {
-  data: ListCardProps;
+  data: CardProps;
   atLocation: boolean;
 };
 
@@ -44,7 +39,7 @@ export const ListCard = ({ data }: MenuCardType) => {
         padding: "2px",
       }}
     >
-      <CardMedia sx={{ height: 140 }} image={data.url} title="food" />
+      <CardMedia sx={{ minHeight: 140 }} image={data.url} title="food" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {data.title}
@@ -52,8 +47,27 @@ export const ListCard = ({ data }: MenuCardType) => {
         <Typography variant="body2" color="text.secondary">
           {data.description}
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography>Wait Time</Typography>
+          <Typography>45 min </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography>Price</Typography>
+          <Typography>{formatCurrency(data.price)}</Typography>
+        </Box>
       </CardContent>
-      <CardActions style={{ display: "flex", justifyContent: "flex-end" }}>
+      <CardActions style={{ display: "flex", justifyContent: "flex-end", alignSelf:'flex-end',height:'100%' }}>
+        <Box style={{ display: "flex",  alignSelf:'flex-end'}}>
         {quantity === 0 ? (
           <Button
             variant="contained"
@@ -84,6 +98,7 @@ export const ListCard = ({ data }: MenuCardType) => {
             </Button>
           </Box>
         )}
+        </Box>
       </CardActions>
     </Card>
   );
