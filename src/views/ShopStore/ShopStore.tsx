@@ -7,11 +7,11 @@ import { ListCard } from "../../components/ListCard/ListCard";
 import { pageHelper } from '../../queries/queryHelper';
 
 interface ShopStoreItem {
-  id:number;
-  title:string;
-  url:string;
-  description:string;
-  price:number;
+  id: number;
+  title: string;
+  url: string;
+  description: string;
+  price: number;
 }
 
 export const ShopStore = () => {
@@ -19,12 +19,11 @@ export const ShopStore = () => {
   const [storeCards, setStoreCards] = useState<ShopStoreItem[]>();
   const { state } = useLocation();
   const { titlePage } = state;
-
-
-  useEffect(()=> {
-      setStoreCards(pageHelper(titlePage));
-      setEnterAnimation(true);
-  },[storeCards])
+ 
+  useEffect(() => {
+    setStoreCards(pageHelper(titlePage));
+    setEnterAnimation(true);
+  }, [storeCards])
 
   return (
     <Slide
@@ -35,25 +34,24 @@ export const ShopStore = () => {
       {...(enterAnimation ? { timeout: 500 } : {})}
     >
       <Wrapper>
-          <ContentPage>
-            <Title>
-              <Typography component={'span'} variant="h4" sx={{ color: "white" }}>
-                {titlePage}
-              </Typography>
-            </Title>
-            <Listing>
+        <ContentPage>
+          <Title>
+            <Typography component={'span'} variant="h4" sx={{ color: "white" }}>
+              {titlePage}
+            </Typography>
+          </Title>
+          <Listing>
             {storeCards !== undefined
               ? storeCards.map(item => (
-                    <ListCard
-                      key={item.id}
-                      data={item}
-                      atLocation={false}
-                    />
-                  )
-                )
+                <ListCard
+                  key={item.id}
+                  data={item}
+                />
+              )
+              )
               : ""}
-              </Listing>
-          </ContentPage>
+          </Listing>
+        </ContentPage>
       </Wrapper>
     </Slide>
   );
@@ -118,18 +116,18 @@ const Listing = styled.div`
 //   attributes: DataFoodMenu;
 // }
 
-  // const { refetch, status, data } = useQuery({
-  //   queryKey: ["MenuFoodData"],
-  //   queryFn: () => getFoodMenu(titlePage),
-  //   // placeholderData: placeholdercardData,
-  //   onSuccess: (data) => {
-  //     setStoreCards(data), setEnterAnimation(true);
-  //   },
-  // });
+// const { refetch, status, data } = useQuery({
+//   queryKey: ["MenuFoodData"],
+//   queryFn: () => getFoodMenu(titlePage),
+//   // placeholderData: placeholdercardData,
+//   onSuccess: (data) => {
+//     setStoreCards(data), setEnterAnimation(true);
+//   },
+// });
 
-  // if (status === "loading") return <div>Loading...</div>;
+// if (status === "loading") return <div>Loading...</div>;
 
-  // if (status === "error") return <div>An error has occurred</div>;
+// if (status === "error") return <div>An error has occurred</div>;
 
 {/* <Listing>
 {storeCards !== undefined

@@ -5,25 +5,12 @@ import styled from "styled-components";
 import BgMain from "../../assets/img/restaurant.webp";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import { getCategories } from "../../queries/queries";
-// import { useQueryClient } from "@tanstack/react-query";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 export const MainPage = () => {
   const [enterAnimation, setEnterAnimation] = useState(false);
-
+  const { inLocationShopping, takeAwayShopping } = useShoppingCart();
   const containerRef = useRef(null);
-  //const queryClient = useQueryClient();
-  // queryClient.prefetchQuery({
-  //   queryKey: ["MenuCategoriesData"],
-  //   queryFn: () => getCategories(),
-  // });
-
-  // const onHoverPrefetch = () => {
-  //   queryClient.prefetchQuery({
-  //     queryKey: ["MenuCategoriesData"],
-  //     queryFn: () => getCategories(),
-  //   });
-  // };
 
   useEffect(() => {
     setTimeout(() => {
@@ -57,7 +44,7 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                // onMouseEnter={onHoverPrefetch}
+                onClick={takeAwayShopping}
               >
                 <NavBox>
                   <Typography
@@ -86,7 +73,7 @@ export const MainPage = () => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                // onMouseEnter={onHoverPrefetch}
+                onClick={inLocationShopping}
               >
                 <NavBox>
                   <Typography
@@ -190,3 +177,17 @@ const LinkBoxRight = styled.div`
     transform: perspective(200px) rotateY(357deg);
   }
 `;
+
+
+  //const queryClient = useQueryClient();
+  // queryClient.prefetchQuery({
+  //   queryKey: ["MenuCategoriesData"],
+  //   queryFn: () => getCategories(),
+  // });
+
+  // const onHoverPrefetch = () => {
+  //   queryClient.prefetchQuery({
+  //     queryKey: ["MenuCategoriesData"],
+  //     queryFn: () => getCategories(),
+  //   });
+  // };

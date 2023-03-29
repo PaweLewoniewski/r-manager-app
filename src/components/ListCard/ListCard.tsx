@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Typography,
@@ -14,14 +13,15 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { useLocation } from "react-router-dom";
 import { formatCurrency } from '../../utilities/formatCurrency';
 import { CardProps } from '../../data/dataTypes';
+import { SmallSelectInput } from '../../assets/SmallSelectInput/SmallSelectInput';
+import { tableQuantity } from '../../data/data';
 
 type MenuCardType = {
   data: CardProps;
-  atLocation: boolean;
 };
 
 export const ListCard = ({ data }: MenuCardType) => {
-  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } =
+  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, atLocation } =
     useShoppingCart();
   const { state } = useLocation();
   const { titlePage } = state;
@@ -36,7 +36,7 @@ export const ListCard = ({ data }: MenuCardType) => {
         display: "flex",
         justifyContent: "flex-start",
         flexDirection: "column",
-        padding: "2px",
+        padding: "5px",
       }}
     >
       <CardMedia sx={{ minHeight: 140 }} image={data.url} title="food" />
@@ -66,40 +66,43 @@ export const ListCard = ({ data }: MenuCardType) => {
           <Typography>{formatCurrency(data.price)}</Typography>
         </Box>
       </CardContent>
-      <CardActions style={{ display: "flex", justifyContent: "flex-end", alignSelf:'flex-end',height:'100%' }}>
-        <Box style={{ display: "flex",  alignSelf:'flex-end'}}>
-        {quantity === 0 ? (
-          <Button
-            variant="contained"
-            size="small"
-            color="success"
-            onClick={() => increaseCartQuantity(data.id, titlePage)}
-          >
-            Order
-          </Button>
-        ) : (
-          <Box style={{ display: "flex", padding: "10px" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'flex-end', height: '100%', width: '100%' }}>
+        {atLocation ?
+          <SmallSelectInput valueData={tableQuantity} name={'Table'} /> : ''
+        }
+        <Box>
+          {quantity === 0 ? (
             <Button
-              variant="outlined"
-              color="primary"
+              variant="contained"
               size="small"
+              color="success"
               onClick={() => increaseCartQuantity(data.id, titlePage)}
             >
-              <AddIcon />
+              Order
             </Button>
-            <Typography style={{ padding: "10px" }}>{quantity}</Typography>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="small"
-              onClick={() => decreaseCartQuantity(data.id, titlePage)}
-            >
-              <RemoveIcon />
-            </Button>
-          </Box>
-        )}
+          ) : (
+            <Box style={{ display: "flex" }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="small"
+                onClick={() => increaseCartQuantity(data.id, titlePage)}
+              >
+                <AddIcon />
+              </Button>
+              <Typography style={{ padding: "10px" }}>{quantity}</Typography>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="small"
+                onClick={() => decreaseCartQuantity(data.id, titlePage)}
+              >
+                <RemoveIcon />
+              </Button>
+            </Box>
+          )}
         </Box>
-      </CardActions>
+      </Box>
     </Card>
   );
 };

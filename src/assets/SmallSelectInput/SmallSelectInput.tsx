@@ -11,19 +11,19 @@ interface SmallSelectInputProps {
 }
 
 export const SmallSelectInput = ({valueData, name}: SmallSelectInputProps) => {
-  const [age, setAge] = React.useState("");
+  const [number, setNumber] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+    setNumber(event.target.value);
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl sx={{ minWidth: 120 }} size="small">
       <InputLabel id="demo-select-small">{name}</InputLabel>
       <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        value={age}
+        labelId="select number"
+        id='select-number'
+        value={number}
         label="Age"
         onChange={handleChange}
       >

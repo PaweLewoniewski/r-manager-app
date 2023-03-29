@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { ReactNode, createContext, useContext } from "react";
 import { useLocalStorage } from '../hook/useLocalStorage';
 
@@ -9,16 +9,20 @@ type ShopingCartProviderProps = {
 type CartItem = {
     id: number;
     quantity: number;
-    storeCategory:string;
+    storeCategory: string;
+    atLocation: boolean;
 }
 
 type ShoppingCartContext = {
     getItemQuantity: (id: number) => number;
-    increaseCartQuantity: (id: number, storeCategory:string) => void;
-    decreaseCartQuantity: (id: number, storeCategory:string) => void;
-    removeFromCart: (id: number, storeCategory:string) => void;
-    cartQuantity:number;
-    cartItems:CartItem[];
+    increaseCartQuantity: (id: number, storeCategory: string) => void;
+    decreaseCartQuantity: (id: number, storeCategory: string) => void;
+    removeFromCart: (id: number, storeCategory: string) => void;
+    cartQuantity: number;
+    cartItems: CartItem[];
+    inLocationShopping: () => void;
+    takeAwayShopping:() => void;
+    atLocation: boolean;
 }
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
@@ -28,23 +32,26 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
-    const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('shoping-cart',[])
+
+    const [atLocation, setAtLocation] = useLocalStorage<boolean>('shoping-cart', false);
+    const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('shoping-cart', [])
 
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
-
+    const inLocationShopping = () => setAtLocation(true);
+    const takeAwayShopping = () => setAtLocation(false);
 
     function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0;
     }
 
-    function increaseCartQuantity(id: number, storeCategory:string) {
+    function increaseCartQuantity(id: number, storeCategory: string) {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) === undefined) {
-                return [...currItems, { id, quantity: 1, storeCategory }]
+                return [...currItems, { id, quantity: 1, storeCategory, atLocation:atLocation }]
             } else {
                 return currItems.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1 ,storeCategory }
+                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation:atLocation }
                     } else {
                         return item;
                     }
@@ -53,14 +60,14 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
         })
     }
 
-    function decreaseCartQuantity(id: number,storeCategory:string) {
+    function decreaseCartQuantity(id: number, storeCategory: string) {
         setCartItems(items => {
             if (items.find(item => item.id === id)?.quantity === 1) {
                 return items.filter(item => item.id !== id)
             } else {
                 return items.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity - 1, storeCategory }
+                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation:atLocation }
                     } else {
                         return item
                     }
@@ -76,7 +83,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     }
 
     return (
-        <ShoppingCartContext.Provider value={{ getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartQuantity, cartItems }}>
+        <ShoppingCartContext.Provider value={{ getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartQuantity, cartItems, inLocationShopping, takeAwayShopping, atLocation }}>
             {children}
         </ShoppingCartContext.Provider>
     )
