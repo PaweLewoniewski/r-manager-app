@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { CardCart } from "../../components/CartCard/CartCard";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { formatCurrency } from "../../utilities/formatCurrency";
-// import shopStoreItems from "../data/database.json";
 import { pageHelper } from "../../queries/queryHelper";
 
 export const CartStep = () => {

@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { CartStep } from "../CartStep/CartStep";
 import { DataStep } from "../DataStep/DataStep";
 import { PaymentStep } from "../PaymentStep/PaymentStep";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 function getSteps() {
   return ["Your Cart", "Data", "Payment method"];
@@ -31,6 +32,7 @@ function getStepContent(step: number) {
 export const Checkout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+  const  { cartQuantity } = useShoppingCart();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -117,6 +119,7 @@ export const Checkout = () => {
                       variant="contained"
                       color="primary"
                       onClick={handleNext}
+                      disabled={cartQuantity <= 0 }
                     >
                       {activeStep === steps.length - 1 ? "Finish" : "Next"}
                     </Button>
