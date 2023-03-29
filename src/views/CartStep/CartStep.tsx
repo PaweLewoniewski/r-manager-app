@@ -25,6 +25,7 @@ export const CartStep = () => {
         </ContentBox>
         <SummaryPrice>
           <Typography component={"span"} sx={{ color: "white" }} variant="h6">
+            Total: 
             {formatCurrency(cartItems.reduce((total, cartItem) => {
               const item = pageHelper(cartItem.storeCategory).find(i => i.id === cartItem.id)
               return total + (item?.price || 0) * cartItem.quantity
