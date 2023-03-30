@@ -5,9 +5,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { OrderCardKitchen } from "../../components/OrderCardKitchen/OrderCardKitchen";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 export const Kitchen = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
+  const { cartItems } = useShoppingCart();
+
+  const ordersTakeway = cartItems.filter((item) => item.atLocation === false);
+  if (ordersTakeway === undefined) return null;
+
+  const ordersAtLocation = cartItems.filter((item) => item.atLocation === true);
+  if (ordersAtLocation === undefined) return null;
 
   return (
     <Slide
@@ -20,30 +28,46 @@ export const Kitchen = () => {
       <Wrapper>
         <ContentPage>
           <Title>
-            <Typography component={'span'} variant="h4" sx={{ color: "white" }}>
+            <Typography component={"span"} variant="h4" sx={{ color: "white" }}>
               Kitchen
             </Typography>
           </Title>
           <ContentBox>
             <Box sx={{ width: "50%" }}>
               <BoxTitle>
-                <Typography component={'span'} variant="h6" sx={{ color: "white" }}>
+                <Typography
+                  component={"span"}
+                  variant="h6"
+                  sx={{ color: "white" }}
+                >
                   Takeaway
                 </Typography>
               </BoxTitle>
               <BoxOrders>
-                <OrderCardKitchen />
+                {ordersTakeway !== undefined
+                  ? ordersTakeway.map((item) => (
+                        <OrderCardKitchen key={item.id} {...item} />
+                    ))
+                  : ""}
               </BoxOrders>
             </Box>
             <Separator />
             <Box sx={{ width: "50%" }}>
               <BoxTitle>
-                <Typography component={'span'} variant="h6" sx={{ color: "white" }}>
+                <Typography
+                  component={"span"}
+                  variant="h6"
+                  sx={{ color: "white" }}
+                >
                   At location
                 </Typography>
               </BoxTitle>
               <BoxOrders>
-                <OrderCardKitchen />
+                {ordersAtLocation !== undefined
+                  ? ordersAtLocation.map((item) => (
+                      <OrderCardKitchen key={item.id} {...item} />
+                    ))
+                  : ""}
               </BoxOrders>
             </Box>
           </ContentBox>
@@ -64,7 +88,7 @@ const Wrapper = styled.div`
   background-size: cover;
   overflow: hidden;
   position: relative;
-  margin:5px;
+  margin: 5px;
 `;
 
 const ContentPage = styled.div`
@@ -94,14 +118,13 @@ const Title = styled.div`
   justify-content: flex-start;
   border-bottom: 1px solid white;
   width: 100%;
-  margin:20px 5px;
+  margin: 20px 0px;
 `;
 
 const ContentBox = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 5px;
 `;
 
 const BoxTitle = styled.div`
