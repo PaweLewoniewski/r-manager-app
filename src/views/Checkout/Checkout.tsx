@@ -32,14 +32,23 @@ function getStepContent(step: number) {
 export const Checkout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-  const  { cartQuantity } = useShoppingCart();
+  const { cartQuantity, atLocation } = useShoppingCart();
+
+
+  if (atLocation && activeStep === 1) {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  }
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (atLocation) {
+      setActiveStep((prevActiveStep) => prevActiveStep - 2);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
 
   const handleReset = () => {
@@ -71,16 +80,16 @@ export const Checkout = () => {
                       color: "white", // circle color (COMPLETED)
                     },
                     "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
-                      {
-                        color: "grey.500", // Just text label (COMPLETED)
-                      },
+                    {
+                      color: "grey.500", // Just text label (COMPLETED)
+                    },
                     "& .MuiStepLabel-root .Mui-active": {
                       color: "#8df700", // circle color (ACTIVE)
                     },
                     "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                      {
-                        color: "common.white", // Just text label (ACTIVE)
-                      },
+                    {
+                      color: "common.white", // Just text label (ACTIVE)
+                    },
                     "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text": {
                       fill: "black", // circle's number (ACTIVE)
                     },
@@ -119,7 +128,7 @@ export const Checkout = () => {
                       variant="contained"
                       color="primary"
                       onClick={handleNext}
-                      disabled={cartQuantity <= 0 }
+                      disabled={cartQuantity <= 0}
                     >
                       {activeStep === steps.length - 1 ? "Finish" : "Next"}
                     </Button>

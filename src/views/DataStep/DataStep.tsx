@@ -1,3 +1,4 @@
+import React from 'react';
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import { InputTextField } from "../../assets/InputextField/InputextField";
@@ -13,6 +14,9 @@ export const DataStep = () => {
         </Title>
         <ContentBox>
             <InputTextField label={"First Name"} />
+            <InputTextField label={"Last Name"} />
+            <InputTextField label={"Phone"} />
+            <InputTextField label={"Adress"} />
         </ContentBox>
       </ContentPage>
     </Wrapper>
@@ -40,7 +44,7 @@ const Title = styled.div`
 const ContentBox = styled.div`
   display: flex;
   justify-content: flex-start;
-  flex-direction: column;
+  flex-wrap:wrap;
   border-bottom: 1px solid white;
-  padding: 5px;
+  padding: 20px;
 `;

@@ -25,8 +25,8 @@ export const ListCard = ({ data }: MenuCardType) => {
     useShoppingCart();
   const { state } = useLocation();
   const { titlePage } = state;
-
   const quantity = getItemQuantity(data.id);
+
 
   return (
     <Card

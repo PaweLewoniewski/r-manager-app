@@ -31,7 +31,7 @@ export const ShopStore = () => {
       in={enterAnimation}
       mountOnEnter
       unmountOnExit
-      {...(enterAnimation ? { timeout: 500 } : {})}
+      {...(enterAnimation ? { timeout: 800 } : {})}
     >
       <Wrapper>
         <ContentPage>

@@ -33,7 +33,7 @@ export const MainPage = () => {
               direction="left"
               in={enterAnimation}
               container={containerRef.current}
-              {...(enterAnimation ? { timeout: 500 } : {})}
+              {...(enterAnimation ? { timeout: 800 } : {})}
             >
               <Link
                 to={"/category"}
