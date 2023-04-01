@@ -5,18 +5,19 @@ import styled from "styled-components";
 import BgCategory from "../../assets/img/categorymenu.webp";
 import { ListCard } from "../../components/ListCard/ListCard";
 import { pageHelper } from '../../queries/queryHelper';
+import { CardProps } from '../../data/dataTypes';
 
-interface ShopStoreItem {
-  id: number;
-  title: string;
-  url: string;
-  description: string;
-  price: number;
-}
+// interface ShopStoreItem {
+//   id: number;
+//   title: string;
+//   url: string;
+//   description: string;
+//   price: number;
+// }
 
 export const ShopStore = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
-  const [storeCards, setStoreCards] = useState<ShopStoreItem[]>();
+  const [storeCards, setStoreCards] = useState<CardProps[]>();
   const { state } = useLocation();
   const { titlePage } = state;
  

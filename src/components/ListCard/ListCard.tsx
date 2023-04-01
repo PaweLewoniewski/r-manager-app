@@ -54,7 +54,7 @@ export const ListCard = ({ data }: MenuCardType) => {
           }}
         >
           <Typography>Wait Time</Typography>
-          <Typography>45 min </Typography>
+          <Typography>{data.baseTime}&nbsp;min</Typography>
         </Box>
         <Box
           sx={{

@@ -4,6 +4,7 @@ export interface CardProps {
   url: string;
   description: string;
   price:number;
+  baseTime:number;
 }
 
 export interface inputTableTypes {

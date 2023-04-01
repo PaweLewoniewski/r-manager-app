@@ -92,7 +92,7 @@ export const CardCart = ({ id, quantity, storeCategory }: CartItemProps) => {
                   }}
                 >
                   <Typography>Wait Time</Typography>
-                  <Typography>45 min </Typography>
+                  <Typography>{itemInCart.baseTime}&nbsp;min</Typography>
                 </Box>
                 <Box
                   sx={{

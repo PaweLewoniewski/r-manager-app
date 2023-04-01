@@ -11,6 +11,7 @@ import { CartStep } from "../CartStep/CartStep";
 import { DataStep } from "../DataStep/DataStep";
 import { PaymentStep } from "../PaymentStep/PaymentStep";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { SummaryShopping } from "../SummaryShopping/SummaryShopping";
 
 function getSteps() {
   return ["Your Cart", "Data", "Payment method"];
@@ -105,10 +106,12 @@ export const Checkout = () => {
           <Box>
             {activeStep === steps.length ? (
               <Box>
-                <Typography>Summary, Thank U for shopping</Typography>
-                <Button variant="contained" onClick={handleReset}>
+                <Box>
+                  <SummaryShopping />
+                </Box>
+                {/* <Button sx={{margin:'20px 0px'}} variant="contained" onClick={handleReset}>
                   Reset
-                </Button>
+                </Button> */}
               </Box>
             ) : (
               <Box>

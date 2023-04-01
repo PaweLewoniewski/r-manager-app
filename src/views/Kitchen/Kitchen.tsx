@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
 import Typography from "@mui/material/Typography";
@@ -9,7 +10,7 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 export const Kitchen = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
-  const { cartItems } = useShoppingCart();
+  const { cartItems, finishShopingInfo } = useShoppingCart();
 
   const ordersTakeway = cartItems.filter((item) => item.atLocation === false);
   if (ordersTakeway === undefined) return null;
@@ -44,7 +45,7 @@ export const Kitchen = () => {
                 </Typography>
               </BoxTitle>
               <BoxOrders>
-                {ordersTakeway !== undefined
+                {ordersTakeway !== undefined && finishShopingInfo === true
                   ? ordersTakeway.map((item) => (
                         <OrderCardKitchen key={item.id} {...item} />
                     ))
@@ -63,7 +64,7 @@ export const Kitchen = () => {
                 </Typography>
               </BoxTitle>
               <BoxOrders>
-                {ordersAtLocation !== undefined
+                {ordersAtLocation !== undefined && finishShopingInfo === true
                   ? ordersAtLocation.map((item) => (
                       <OrderCardKitchen key={item.id} {...item} />
                     ))
