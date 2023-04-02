@@ -21,6 +21,9 @@ export const ShopStore = () => {
   const { state } = useLocation();
   const { titlePage } = state;
  
+
+
+
   useEffect(() => {
     setStoreCards(pageHelper(titlePage));
     setEnterAnimation(true);

@@ -54,9 +54,9 @@ export const Checkout = () => {
     }
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
 
   return (
     <Wrapper>
