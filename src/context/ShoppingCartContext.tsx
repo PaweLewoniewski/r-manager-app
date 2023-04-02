@@ -28,6 +28,7 @@ type ShoppingCartContext = {
     closeOrderShopping: () => void;
     orderShop: boolean;
     orderTimer:string;
+    settingTimeOrder:() => void;
 }
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
@@ -52,7 +53,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     const takeAwayShopping = () => setAtLocation(false);
     const openOrderShopping = () => setOrderShop(true);
     const closeOrderShopping = () => setOrderShop(false);
-    const settingTimeOrder = () => setOrderTimer(parseTime);
+    const settingTimeOrder = () => setOrderTimer(() => parseTime);
 
     function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0;
@@ -110,7 +111,8 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             openOrderShopping,
             closeOrderShopping,
             orderShop,
-            orderTimer
+            orderTimer,
+            settingTimeOrder
         }}>
             {children}
         </ShoppingCartContext.Provider>
