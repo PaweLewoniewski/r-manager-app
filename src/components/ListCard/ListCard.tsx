@@ -68,9 +68,11 @@ export const ListCard = ({ data }: MenuCardType) => {
       </CardContent>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'flex-end', height: '100%', width: '100%' }}>
         {atLocation ?
-          <SmallSelectInput valueData={tableQuantity} name={'Table'} /> : ''
+          <Box sx={{padding:'10px'}}>
+            <SmallSelectInput valueData={tableQuantity} name={'Table'} />
+          </Box> : ''
         }
-        <Box>
+        <Box sx={{padding:'10px'}}>
           {quantity === 0 ? (
             <Button
               variant="contained"
@@ -81,7 +83,7 @@ export const ListCard = ({ data }: MenuCardType) => {
               Order
             </Button>
           ) : (
-            <Box style={{ display: "flex" }}>
+            <Box style={{ display: "flex", padding: '10px' }}>
               <Button
                 variant="outlined"
                 color="primary"

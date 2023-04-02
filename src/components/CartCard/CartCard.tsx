@@ -114,7 +114,7 @@ export const CardCart = ({ id, quantity, storeCategory }: CartItemProps) => {
                     sx={{
                       display: "flex",
                       justifyContent: "flex-start",
-                      alignItems: "center",
+                      alignItems: "center"
                     }}
                   >
                     <Button variant="outlined" color="primary" onClick={() => increaseCartQuantity(id, storeCategory)}>
