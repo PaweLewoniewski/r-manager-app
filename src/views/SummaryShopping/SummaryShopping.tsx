@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
-import { useShoppingCart } from '../../context/ShoppingCartContext';
+
 
 export const SummaryShopping = () => {
-    const [ finishShop, setFinishShop] = useState<boolean>(false);
-    const { finishShopping } = useShoppingCart();
-
-    useEffect(() => {
-        setFinishShop(true);
-        finishShopping();
-    }, [finishShop])
-
     return (
         <Wrapper>
             <ContentPage>

@@ -23,8 +23,9 @@ type ShoppingCartContext = {
     inLocationShopping: () => void;
     takeAwayShopping: () => void;
     atLocation: boolean;
-    finishShopping: () => void;
-    finishShopingInfo: boolean;
+    openOrderShopping: () => void;
+    closeOrderShopping: () => void;
+    orderShop: boolean;
 }
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
@@ -35,14 +36,16 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
 
-    const [finishShopingInfo, setFinishShopingInfo] = useState<boolean>(false);
+    const [orderShop, setOrderShop] = useState<boolean>(false);
     const [atLocation, setAtLocation] = useState<boolean>(false);
     const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('shoping-cart', [])
 
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
     const inLocationShopping = () => setAtLocation(true);
     const takeAwayShopping = () => setAtLocation(false);
-    const finishShopping = () => setFinishShopingInfo(true);
+    const openOrderShopping = () => setOrderShop(true);
+    const closeOrderShopping = () => setOrderShop(false);
+
 
     function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0;
@@ -51,11 +54,11 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     function increaseCartQuantity(id: number, storeCategory: string) {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) === undefined) {
-                return [...currItems, { id, quantity: 1, storeCategory, atLocation, finishShopingInfo }]
+                return [...currItems, { id, quantity: 1, storeCategory, atLocation, orderShop }]
             } else {
                 return currItems.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation, finishShopingInfo}
+                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation, orderShop}
                     } else {
                         return item;
                     }
@@ -71,7 +74,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             } else {
                 return items.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation, finishShopingInfo}
+                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation, orderShop}
                     } else {
                         return item
                     }
@@ -97,8 +100,9 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             inLocationShopping,
             takeAwayShopping,
             atLocation,
-            finishShopping,
-            finishShopingInfo
+            openOrderShopping,
+            closeOrderShopping,
+            orderShop
         }}>
             {children}
         </ShoppingCartContext.Provider>

@@ -24,8 +24,13 @@ export const OrderCardKitchen = ({
   storeCategory,
 }: KitchenCartProps) => {
   const [removeConfirm, setRemoveConfirm] = useState<boolean>(false);
-  const { removeFromCart } = useShoppingCart();
+  const { removeFromCart, closeOrderShopping } = useShoppingCart();
   const [animation, setAnimation] = useState(true);
+
+  const removeHandler = (id:number, storeCategory:string) => {
+    removeFromCart(id,storeCategory);
+    closeOrderShopping();
+  }   
 
   const itemInCart = pageHelper(storeCategory).find((i) => i.id === id);
   if (itemInCart === undefined) return null;
@@ -100,7 +105,7 @@ export const OrderCardKitchen = ({
                       variant="outlined"
                       color="error"
                       sx={{ marginRight: "10px" }}
-                      onClick={() => removeFromCart(id, storeCategory)}
+                      onClick={() => removeHandler(id, storeCategory)}
                     >
                       Yes
                     </Button>

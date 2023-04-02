@@ -33,8 +33,7 @@ function getStepContent(step: number) {
 export const Checkout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-  const { cartQuantity, atLocation } = useShoppingCart();
-
+  const { cartQuantity, atLocation, openOrderShopping } = useShoppingCart();
 
   if (atLocation && activeStep === 1) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -42,6 +41,9 @@ export const Checkout = () => {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if(activeStep === steps.length - 1){
+      openOrderShopping();
+    }
   };
 
   const handleBack = () => {
