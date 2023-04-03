@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -8,14 +8,16 @@ import { inputTableTypes } from "../../data/dataTypes";
 interface SmallSelectInputProps {
   valueData: inputTableTypes[];
   name:string;
+  onChange?: (e:any) => void;
 }
 
-export const SmallSelectInput = ({valueData, name}: SmallSelectInputProps) => {
-  const [number, setNumber] = React.useState("");
+export const SmallSelectInput = ({valueData, name, onChange}: SmallSelectInputProps) => {
+  const [number, setNumber] = useState("");
+
 
   const handleChange = (event: SelectChangeEvent) => {
     setNumber(event.target.value);
-  };
+  }; 
 
   return (
     <FormControl sx={{ minWidth: 120 }} size="small">

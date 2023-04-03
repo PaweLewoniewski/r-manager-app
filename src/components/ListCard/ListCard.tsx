@@ -21,7 +21,7 @@ type MenuCardType = {
 };
 
 export const ListCard = ({ data }: MenuCardType) => {
-  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, atLocation } =
+  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, atLocation, settingOrderTable } =
     useShoppingCart();
   const { state } = useLocation();
   const { titlePage } = state;
@@ -69,7 +69,7 @@ export const ListCard = ({ data }: MenuCardType) => {
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'flex-end', height: '100%', width: '100%' }}>
         {atLocation ?
           <Box sx={{padding:'10px'}}>
-            <SmallSelectInput valueData={tableQuantity} name={'Table'} />
+            <SmallSelectInput valueData={tableQuantity} name={'Table'}/>
           </Box> : ''
         }
         <Box sx={{padding:'10px'}}>
@@ -83,7 +83,7 @@ export const ListCard = ({ data }: MenuCardType) => {
               Order
             </Button>
           ) : (
-            <Box style={{ display: "flex", padding: '10px' }}>
+            <Box style={{ display: "flex"}}>
               <Button
                 variant="outlined"
                 color="primary"

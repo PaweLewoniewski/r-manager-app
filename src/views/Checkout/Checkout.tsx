@@ -69,7 +69,7 @@ export const Checkout = () => {
         </Title>
         <Box sx={{ width: "100%", color: "white" }}>
           <Stepper activeStep={activeStep} sx={{ color: "white" }}>
-            {steps.map((label, index) => {
+            {steps.map((label) => {
               const stepProps: { completed?: boolean } = {};
               const labelProps: { optional?: React.ReactNode } = {};
               // if (isStepOptional(index)) {

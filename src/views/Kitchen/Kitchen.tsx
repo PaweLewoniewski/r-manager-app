@@ -9,7 +9,7 @@ import { OrderCardKitchen } from "../../components/OrderCardKitchen/OrderCardKit
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 export const Kitchen = () => {
-  const [enterAnimation, setEnterAnimation] = useState(true);
+  const [ enterAnimation ] = useState(true);
   const { cartItems, orderShop } = useShoppingCart();
 
   const ordersTakeway = cartItems.filter((item) => item.atLocation === false);

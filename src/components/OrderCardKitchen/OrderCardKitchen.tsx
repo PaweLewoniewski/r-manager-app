@@ -26,8 +26,8 @@ export const OrderCardKitchen = ({
 }: KitchenCartProps) => {
   const [removeConfirm, setRemoveConfirm] = useState<boolean>(false);
   const { removeFromCart, closeOrderShopping, orderTimer } = useShoppingCart();
-  const [animation, setAnimation] = useState(true);
-  const [timeResult, setTimeResult] = useState<string>(moment(orderTimer).toNow());
+  const [ animation ] = useState(true);
+  const [timeResult, setTimeResult] = useState<string>(() => moment(orderTimer).toNow());
 
   useEffect(() => {
     const intervalId = setInterval(() => {

@@ -7,23 +7,12 @@ import { ListCard } from "../../components/ListCard/ListCard";
 import { pageHelper } from '../../queries/queryHelper';
 import { CardProps } from '../../data/dataTypes';
 
-// interface ShopStoreItem {
-//   id: number;
-//   title: string;
-//   url: string;
-//   description: string;
-//   price: number;
-// }
-
 export const ShopStore = () => {
   const [enterAnimation, setEnterAnimation] = useState(true);
   const [storeCards, setStoreCards] = useState<CardProps[]>();
   const { state } = useLocation();
   const { titlePage } = state;
  
-
-
-
   useEffect(() => {
     setStoreCards(pageHelper(titlePage));
     setEnterAnimation(true);

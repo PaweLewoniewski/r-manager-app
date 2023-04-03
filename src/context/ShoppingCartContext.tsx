@@ -12,6 +12,7 @@ type CartItem = {
     storeCategory: string;
     atLocation: boolean;
     orderTimer:string;
+    shopTable:number;
 }
 
 type ShoppingCartContext = {
@@ -29,6 +30,8 @@ type ShoppingCartContext = {
     orderShop: boolean;
     orderTimer:string;
     settingTimeOrder:() => void;
+    settingOrderTable: (table:number) => void;
+    shopTable:number;
 }
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
@@ -45,6 +48,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     const orderTime = new Date();
     const parseTime = orderTime.toJSON();
     const [orderTimer, setOrderTimer] = useState<string>(parseTime);
+    const [shopTable, setShopTable] = useState<number>(0);
 
 
 
@@ -53,7 +57,9 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     const takeAwayShopping = () => setAtLocation(false);
     const openOrderShopping = () => setOrderShop(true);
     const closeOrderShopping = () => setOrderShop(false);
+
     const settingTimeOrder = () => setOrderTimer(() => parseTime);
+    const settingOrderTable = () => setShopTable((table) => table);
 
     function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0;
@@ -62,11 +68,11 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     function increaseCartQuantity(id: number, storeCategory: string) {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) === undefined) {
-                return [...currItems, { id, quantity: 1, storeCategory, atLocation, orderShop, orderTimer }]
+                return [...currItems, { id, quantity: 1, storeCategory, atLocation, orderShop, orderTimer, shopTable }]
             } else {
                 return currItems.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation, orderShop, orderTimer}
+                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation, orderShop, orderTimer, shopTable}
                     } else {
                         return item;
                     }
@@ -82,7 +88,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             } else {
                 return items.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation, orderShop, orderTimer}
+                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation, orderShop, orderTimer, shopTable}
                     } else {
                         return item
                     }
@@ -112,7 +118,9 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             closeOrderShopping,
             orderShop,
             orderTimer,
-            settingTimeOrder
+            settingTimeOrder,
+            settingOrderTable,
+            shopTable
         }}>
             {children}
         </ShoppingCartContext.Provider>
