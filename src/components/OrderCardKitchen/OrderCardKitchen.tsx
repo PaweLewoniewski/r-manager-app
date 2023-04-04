@@ -25,8 +25,8 @@ export const OrderCardKitchen = ({
   storeCategory,
 }: KitchenCartProps) => {
   const [removeConfirm, setRemoveConfirm] = useState<boolean>(false);
-  const { removeFromCart, closeOrderShopping, orderTimer } = useShoppingCart();
-  const [ animation ] = useState(true);
+  const { removeFromCart, closeOrderShopping, orderTimer, atLocation, shopTable } = useShoppingCart();
+  const [animation] = useState(true);
   const [timeResult, setTimeResult] = useState<string>(() => moment(orderTimer).toNow());
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export const OrderCardKitchen = ({
                 justifyContent: "space-between",
               }}
             >
-              <Typography>Ordered Time</Typography>
+              <Typography>Ordered</Typography>
               <Typography>{timeResult}</Typography>
             </Box>
             <Box
@@ -104,6 +104,17 @@ export const OrderCardKitchen = ({
               <Typography>Quantity</Typography>
               <Typography>{quantity}</Typography>
             </Box>
+            {atLocation ?
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography>Table</Typography>
+                <Typography>{shopTable}</Typography>
+              </Box>
+              : ''}
             <Box
               sx={{
                 display: "flex",

@@ -11,8 +11,8 @@ type CartItem = {
     quantity: number;
     storeCategory: string;
     atLocation: boolean;
-    orderTimer:string;
-    shopTable:number;
+    orderTimer: string;
+    shopTable: number;
     orderShop: boolean;
 }
 
@@ -21,18 +21,19 @@ type ShoppingCartContext = {
     increaseCartQuantity: (id: number, storeCategory: string) => void;
     decreaseCartQuantity: (id: number, storeCategory: string) => void;
     removeFromCart: (id: number, storeCategory: string) => void;
+    category:string;
     cartQuantity: number;
     cartItems: CartItem[];
     inLocationShopping: () => void;
     takeAwayShopping: () => void;
     atLocation: boolean;
     openOrderShopping: () => void;
-    closeOrderShopping: (id:number) => void;
+    closeOrderShopping: (id: number) => void;
     orderShop: boolean;
-    orderTimer:string;
-    settingTimeOrder:() => void;
-    settingOrderTable: (table:number) => void;
-    shopTable:number;
+    orderTimer: string;
+    settingTimeOrder: () => void;
+    settingOrderTable: (id:number, table: number) => void;
+    shopTable: number;
 }
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
@@ -45,6 +46,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
 
     const [orderShop, setOrderShop] = useState<boolean>(false);
     const [atLocation, setAtLocation] = useState<boolean>(false);
+    const [category, setCategory] = useState<string>('');
     const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('shoping-cart', [])
     const orderTime = new Date();
     const parseTime = orderTime.toJSON();
@@ -58,10 +60,10 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     const takeAwayShopping = () => setAtLocation(false);
 
     const settingTimeOrder = () => setOrderTimer(() => parseTime);
-    const settingOrderTable = () => setShopTable((table) => table);
+    const settingOrderTable = (table:number) => setShopTable(table);
+
 
     const openOrderShopping = () => setOrderShop(true);
-
     function closeOrderShopping(id: number) {
         return cartItems.find(item => item.id === id)?.orderShop || false;
     }
@@ -71,13 +73,14 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     }
 
     function increaseCartQuantity(id: number, storeCategory: string) {
+        setCategory(storeCategory);
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) === undefined) {
                 return [...currItems, { id, quantity: 1, storeCategory, atLocation, orderShop, orderTimer, shopTable }]
             } else {
                 return currItems.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation, orderShop, orderTimer, shopTable}
+                        return { ...item, quantity: item.quantity + 1, storeCategory, atLocation, orderShop, orderTimer, shopTable }
                     } else {
                         return item;
                     }
@@ -93,7 +96,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             } else {
                 return items.map(item => {
                     if (item.id === id) {
-                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation, orderShop, orderTimer, shopTable}
+                        return { ...item, quantity: item.quantity - 1, storeCategory, atLocation, orderShop, orderTimer, shopTable }
                     } else {
                         return item
                     }
@@ -114,6 +117,7 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
             increaseCartQuantity,
             decreaseCartQuantity,
             removeFromCart,
+            category,
             cartQuantity,
             cartItems,
             inLocationShopping,

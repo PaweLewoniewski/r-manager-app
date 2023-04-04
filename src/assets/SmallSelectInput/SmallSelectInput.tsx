@@ -8,12 +8,11 @@ import { inputTableTypes } from "../../data/dataTypes";
 interface SmallSelectInputProps {
   valueData: inputTableTypes[];
   name:string;
-  onChange?: (e:any) => void;
+  onClick: (element:number) => void;
 }
 
-export const SmallSelectInput = ({valueData, name, onChange}: SmallSelectInputProps) => {
+export const SmallSelectInput = ({valueData, name, onClick}: SmallSelectInputProps) => {
   const [number, setNumber] = useState("");
-
 
   const handleChange = (event: SelectChangeEvent) => {
     setNumber(event.target.value);
@@ -29,7 +28,7 @@ export const SmallSelectInput = ({valueData, name, onChange}: SmallSelectInputPr
         label="Age"
         onChange={handleChange}
       >
-        {valueData.map(item => <MenuItem key={item.id} value={item.value}>{item.value}</MenuItem>)}
+        {valueData.map(item => <MenuItem key={item.id} value={item.value} onClick={() => onClick(item.value)}>{item.value}</MenuItem>)}
       </Select>
     </FormControl>
   );

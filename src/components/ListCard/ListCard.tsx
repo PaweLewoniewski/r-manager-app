@@ -69,7 +69,7 @@ export const ListCard = ({ data }: MenuCardType) => {
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'flex-end', height: '100%', width: '100%' }}>
         {atLocation ?
           <Box sx={{padding:'10px'}}>
-            <SmallSelectInput valueData={tableQuantity} name={'Table'}/>
+            <SmallSelectInput valueData={tableQuantity} name={'Table'} onClick={(table)=> settingOrderTable(data.id,table)}/>
           </Box> : ''
         }
         <Box sx={{padding:'10px'}}>

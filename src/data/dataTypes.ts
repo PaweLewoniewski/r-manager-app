@@ -9,7 +9,7 @@ export interface CardProps {
 
 export interface inputTableTypes {
     id:number;
-    value:string;
+    value:number;
 }
 
 export interface DataFoodMenu {
