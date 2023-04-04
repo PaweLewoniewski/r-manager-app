@@ -13,6 +13,7 @@ type CartItem = {
     atLocation: boolean;
     orderTimer:string;
     shopTable:number;
+    orderShop: boolean;
 }
 
 type ShoppingCartContext = {
@@ -26,7 +27,7 @@ type ShoppingCartContext = {
     takeAwayShopping: () => void;
     atLocation: boolean;
     openOrderShopping: () => void;
-    closeOrderShopping: () => void;
+    closeOrderShopping: (id:number) => void;
     orderShop: boolean;
     orderTimer:string;
     settingTimeOrder:() => void;
@@ -55,11 +56,15 @@ export function ShoppingCartProvider({ children }: ShopingCartProviderProps) {
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
     const inLocationShopping = () => setAtLocation(true);
     const takeAwayShopping = () => setAtLocation(false);
-    const openOrderShopping = () => setOrderShop(true);
-    const closeOrderShopping = () => setOrderShop(false);
 
     const settingTimeOrder = () => setOrderTimer(() => parseTime);
     const settingOrderTable = () => setShopTable((table) => table);
+
+    const openOrderShopping = () => setOrderShop(true);
+
+    function closeOrderShopping(id: number) {
+        return cartItems.find(item => item.id === id)?.orderShop || false;
+    }
 
     function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0;

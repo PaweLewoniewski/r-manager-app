@@ -41,7 +41,7 @@ export const OrderCardKitchen = ({
 
   const removeHandler = (id: number, storeCategory: string) => {
     removeFromCart(id, storeCategory);
-    closeOrderShopping();
+    closeOrderShopping(id);
   }
 
   const itemInCart = pageHelper(storeCategory).find((i) => i.id === id);
